@@ -1,0 +1,354 @@
+== CheatSheet for SANS 542 course ==
+
+=== http status codes ===================================================
+
+1xx Informational
+ 100 Continue
+ 101 Switching Protocols
+ 102 Processing (WebDAV; RFC 2518)
+
+2xx Success
+ 200 OK
+ 201 Created
+ 202 Accepted
+ 203 Non-Authoritative Information (since HTTP/1.1)
+ 204 No Content
+ 205 Reset Content
+ 206 Partial Content
+ 207 Multi-Status (WebDAV; RFC 4918)
+ 208 Already Reported (WebDAV; RFC 5842)
+ 226 IM Used (RFC 3229)
+
+3xx Redirection
+ 300 Multiple Choices
+ 301 Moved Permanently
+ 302 Found
+ 303 See Other (since HTTP/1.1)
+ 304 Not Modified
+ 305 Use Proxy (since HTTP/1.1)
+ 306 Switch Proxy
+ 307 Temporary Redirect (since HTTP/1.1)
+ 308 Permanent Redirect (approved as experimental RFC])[11]
+
+4xx Client Error
+ 400 Bad Request
+ 401 Unauthorized
+ 402 Payment Required
+ 403 Forbidden
+ 404 Not Found
+ 405 Method Not Allowed
+ 406 Not Acceptable
+ 407 Proxy Authentication Required
+ 408 Request Timeout
+ 409 Conflict
+ 410 Gone
+ 411 Length Required
+ 412 Precondition Failed
+ 413 Request Entity Too Large
+ 414 Request-URI Too Long
+ 415 Unsupported Media Type
+ 416 Requested Range Not Satisfiable
+ 417 Expectation Failed
+ 418 I'm a teapot (RFC 2324)
+ 420 Enhance Your Calm (Twitter)
+ 422 Unprocessable Entity (WebDAV; RFC 4918)
+ 423 Locked (WebDAV; RFC 4918)
+ 424 Failed Dependency (WebDAV; RFC 4918)
+ 424 Method Failure (WebDAV)[13]
+ 425 Unordered Collection (Internet draft)
+ 426 Upgrade Required (RFC 2817)
+ 428 Precondition Required (RFC 6585)
+ 429 Too Many Requests (RFC 6585)
+ 431 Request Header Fields Too Large (RFC 6585)
+ 444 No Response (Nginx)
+ 449 Retry With (Microsoft)
+ 450 Blocked by Windows Parental Controls (Microsoft)
+ 451 Unavailable For Legal Reasons (Internet draft)
+ 494 Request Header Too Large (Nginx)
+ 495 Cert Error (Nginx)
+ 496 No Cert (Nginx)
+ 497 HTTP to HTTPS (Nginx)
+ 499 Client Closed Request (Nginx)
+
+5xx Server Error
+ 500 Internal Server Error
+ 501 Not Implemented
+ 502 Bad Gateway
+ 503 Service Unavailable
+ 504 Gateway Timeout
+ 505 HTTP Version Not Supported
+ 506 Variant Also Negotiates (RFC 2295)
+ 507 Insufficient Storage (WebDAV; RFC 4918)
+ 508 Loop Detected (WebDAV; RFC 5842)
+ 509 Bandwidth Limit Exceeded (Apache bw/limited extension)
+ 510 Not Extended (RFC 2774)
+ 511 Network Authentication Required (RFC 6585)
+ 598 Network read timeout error (Unknown)
+ 599 Network connect timeout error (Unknown)
+
+=== HTTP 1.1 Methods ====================================================
+
+ OPTIONS
+ GET
+ HEAD
+ POST
+ PUT
+ DELETE
+ TRACE
+ CONNECT
+
+=== nmap ================================================================
+
+Usage: nmap [Scan Type(s)] [Options] {target specification}
+TARGET SPECIFICATION:
+  Can pass hostnames, IP addresses, networks, etc.
+  Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254
+  -iL <inputfilename>: Input from list of hosts/networks
+  -iR <num hosts>: Choose random targets
+  --exclude <host1[,host2][,host3],...>: Exclude hosts/networks
+  --excludefile <exclude_file>: Exclude list from file
+HOST DISCOVERY:
+  -sL: List Scan - simply list targets to scan
+  -sP: Ping Scan - go no further than determining if host is online
+  -PN: Treat all hosts as online -- skip host discovery
+  -PS/PA/PU/PY[portlist]: TCP SYN/ACK, UDP or SCTP discovery to given ports
+  -PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes
+  -PO[protocol list]: IP Protocol Ping
+  -n/-R: Never do DNS resolution/Always resolve [default: sometimes]
+  --dns-servers <serv1[,serv2],...>: Specify custom DNS servers
+  --system-dns: Use OS's DNS resolver
+  --traceroute: Trace hop path to each host
+SCAN TECHNIQUES:
+  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans
+  -sU: UDP Scan
+  -sN/sF/sX: TCP Null, FIN, and Xmas scans
+  --scanflags <flags>: Customize TCP scan flags
+  -sI <zombie host[:probeport]>: Idle scan
+  -sY/sZ: SCTP INIT/COOKIE-ECHO scans
+  -sO: IP protocol scan
+  -b <FTP relay host>: FTP bounce scan
+PORT SPECIFICATION AND SCAN ORDER:
+  -p <port ranges>: Only scan specified ports
+    Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080
+  -F: Fast mode - Scan fewer ports than the default scan
+  -r: Scan ports consecutively - don't randomize
+  --top-ports <number>: Scan <number> most common ports
+  --port-ratio <ratio>: Scan ports more common than <ratio>
+SERVICE/VERSION DETECTION:
+  -sV: Probe open ports to determine service/version info
+  --version-intensity <level>: Set from 0 (light) to 9 (try all probes)
+  --version-light: Limit to most likely probes (intensity 2)
+  --version-all: Try every single probe (intensity 9)
+  --version-trace: Show detailed version scan activity (for debugging)
+SCRIPT SCAN:
+  -sC: equivalent to --script=default
+  --script=<Lua scripts>: <Lua scripts> is a comma separated list of 
+           directories, script-files or script-categories
+  --script-args=<n1=v1,[n2=v2,...]>: provide arguments to scripts
+  --script-trace: Show all data sent and received
+  --script-updatedb: Update the script database.
+OS DETECTION:
+  -O: Enable OS detection
+  --osscan-limit: Limit OS detection to promising targets
+  --osscan-guess: Guess OS more aggressively
+TIMING AND PERFORMANCE:
+  Options which take <time> are in milliseconds, unless you append 's'
+  (seconds), 'm' (minutes), or 'h' (hours) to the value (e.g. 30m).
+  -T<0-5>: Set timing template (higher is faster)
+  --min-hostgroup/max-hostgroup <size>: Parallel host scan group sizes
+  --min-parallelism/max-parallelism <time>: Probe parallelization
+  --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout <time>: Specifies
+      probe round trip time.
+  --max-retries <tries>: Caps number of port scan probe retransmissions.
+  --host-timeout <time>: Give up on target after this long
+  --scan-delay/--max-scan-delay <time>: Adjust delay between probes
+  --min-rate <number>: Send packets no slower than <number> per second
+  --max-rate <number>: Send packets no faster than <number> per second
+FIREWALL/IDS EVASION AND SPOOFING:
+  -f; --mtu <val>: fragment packets (optionally w/given MTU)
+  -D <decoy1,decoy2[,ME],...>: Cloak a scan with decoys
+  -S <IP_Address>: Spoof source address
+  -e <iface>: Use specified interface
+  -g/--source-port <portnum>: Use given port number
+  --data-length <num>: Append random data to sent packets
+  --ip-options <options>: Send packets with specified ip options
+  --ttl <val>: Set IP time-to-live field
+  --spoof-mac <mac address/prefix/vendor name>: Spoof your MAC address
+  --badsum: Send packets with a bogus TCP/UDP/SCTP checksum
+  --adler32: Use deprecated Adler32 instead of CRC32C for SCTP checksums
+OUTPUT:
+  -oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3,
+     and Grepable format, respectively, to the given filename.
+  -oA <basename>: Output in the three major formats at once
+  -v: Increase verbosity level (use twice or more for greater effect)
+  -d[level]: Set or increase debugging level (Up to 9 is meaningful)
+  --reason: Display the reason a port is in a particular state
+  --open: Only show open (or possibly open) ports
+  --packet-trace: Show all packets sent and received
+  --iflist: Print host interfaces and routes (for debugging)
+  --log-errors: Log errors/warnings to the normal-format output file
+  --append-output: Append to rather than clobber specified output files
+  --resume <filename>: Resume an aborted scan
+  --stylesheet <path/URL>: XSL stylesheet to transform XML output to HTML
+  --webxml: Reference stylesheet from Nmap.Org for more portable XML
+  --no-stylesheet: Prevent associating of XSL stylesheet w/XML output
+MISC:
+  -6: Enable IPv6 scanning
+  -A: Enables OS detection and Version detection, Script scanning and Traceroute
+  --datadir <dirname>: Specify custom Nmap data file location
+  --send-eth/--send-ip: Send using raw ethernet frames or IP packets
+  --privileged: Assume that the user is fully privileged
+  --unprivileged: Assume the user lacks raw socket privileges
+  -V: Print version number
+  -h: Print this help summary page.
+EXAMPLES:
+  nmap -v -A scanme.nmap.org
+  nmap -v -sP 192.168.0.0/16 10.0.0.0/8
+  nmap -v -iR 10000 -PN -p 80
+SEE THE MAN PAGE (http://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES
+
+=== elements of SOA and replies (dig) ===============================================
+domain.com.		3553	IN	SOA	ns.domain.com. hostmaster.domain.com. 2012090635 3600 1800 1209600 3600
+
+ 2012090635   serial
+ 3600         refresh
+ 1800         retry
+ 1209600      expire
+ 3600         minimum
+
+www.domain.com.		3600	IN	CNAME	server.domain.com.
+server.domain.com.	3600	IN	A	193.190.130.15
+
+ 3600         ttl
+
+=== host ================================================================
+
+ Usage: host [-aCdlriTwv] [-c class] [-N ndots] [-t type] [-W time]
+             [-R number] [-m flag] hostname [server]
+        -a is equivalent to -v -t ANY
+        -c specifies query class for non-IN data
+        -C compares SOA records on authoritative nameservers
+        -d is equivalent to -v
+        -l lists all hosts in a domain, using AXFR
+        -i IP6.INT reverse lookups
+        -N changes the number of dots allowed before root lookup is done
+        -r disables recursive processing
+        -R specifies number of retries for UDP packets
+        -s a SERVFAIL response should stop query
+        -t specifies the query type
+        -T enables TCP/IP mode
+        -v enables verbose output
+        -w specifies to wait forever for a reply
+        -W specifies how long to wait for a reply
+        -4 use IPv4 query transport only
+        -6 use IPv6 query transport only
+        -m set memory debugging flag (trace|record|usage)
+
+=== dig =================================================================
+
+Usage:  dig [@global-server] [domain] [q-type] [q-class] {q-opt}
+            {global-d-opt} host [@local-server] {local-d-opt}
+            [ host [@local-server] {local-d-opt} [...]]
+Where:  domain	  is in the Domain Name System
+        q-class  is one of (in,hs,ch,...) [default: in]
+        q-type   is one of (a,any,mx,ns,soa,hinfo,axfr,txt,...) [default:a]
+                 (Use ixfr=version for type ixfr)
+        q-opt    is one of:
+                 -x dot-notation     (shortcut for reverse lookups)
+                 -i                  (use IP6.INT for IPv6 reverse lookups)
+                 -f filename         (batch mode)
+                 -b address[#port]   (bind to source address/port)
+                 -p port             (specify port number)
+                 -q name             (specify query name)
+                 -t type             (specify query type)
+                 -c class            (specify query class)
+                 -k keyfile          (specify tsig key file)
+                 -y [hmac:]name:key  (specify named base64 tsig key)
+                 -4                  (use IPv4 query transport only)
+                 -6                  (use IPv6 query transport only)
+                 -m                  (enable memory usage debugging)
+        d-opt    is of the form +keyword[=value], where keyword is:
+                 +[no]vc             (TCP mode)
+                 +[no]tcp            (TCP mode, alternate syntax)
+                 +time=###           (Set query timeout) [5]
+                 +tries=###          (Set number of UDP attempts) [3]
+                 +retry=###          (Set number of UDP retries) [2]
+                 +domain=###         (Set default domainname)
+                 +bufsize=###        (Set EDNS0 Max UDP packet size)
+                 +ndots=###          (Set NDOTS value)
+                 +edns=###           (Set EDNS version)
+                 +[no]search         (Set whether to use searchlist)
+                 +[no]showsearch     (Search with intermediate results)
+                 +[no]defname        (Ditto)
+                 +[no]recurse        (Recursive mode)
+                 +[no]ignore         (Don't revert to TCP for TC responses.)
+                 +[no]fail           (Don't try next server on SERVFAIL)
+                 +[no]besteffort     (Try to parse even illegal messages)
+                 +[no]aaonly         (Set AA flag in query (+[no]aaflag))
+                 +[no]adflag         (Set AD flag in query)
+                 +[no]cdflag         (Set CD flag in query)
+                 +[no]cl             (Control display of class in records)
+                 +[no]cmd            (Control display of command line)
+                 +[no]comments       (Control display of comment lines)
+                 +[no]question       (Control display of question)
+                 +[no]answer         (Control display of answer)
+                 +[no]authority      (Control display of authority)
+                 +[no]additional     (Control display of additional)
+                 +[no]stats          (Control display of statistics)
+                 +[no]short          (Disable everything except short
+                                      form of answer)
+                 +[no]ttlid          (Control display of ttls in records)
+                 +[no]all            (Set or clear all display flags)
+                 +[no]qr             (Print question before sending)
+                 +[no]nssearch       (Search all authoritative nameservers)
+                 +[no]identify       (ID responders in short answers)
+                 +[no]trace          (Trace delegation down from root)
+                 +[no]dnssec         (Request DNSSEC records)
+                 +[no]nsid           (Request Name Server ID)
+                 +[no]multiline      (Print records in an expanded format)
+        global d-opts and servers (before host name) affect all queries.
+        local d-opts and servers (after host name) affect only that lookup.
+        -h                           (print help and exit)
+        -v                           (print version and exit)
+
+=== nc ==================================================================
+
+usage: nc [-46DdhklnrtUuvz] [-i interval] [-p source_port]
+	  [-s source_ip_address] [-w timeout] [-X proxy_version]
+	  [-x proxy_address[:port]] [hostname] [port[s]]
+	Command Summary:
+		-4		Use IPv4
+		-6		Use IPv6
+		-D		Enable the debug socket option
+		-d		Detach from stdin
+		-h		This help text
+		-i secs		Delay interval for lines sent, ports scanned
+		-k		Keep inbound sockets open for multiple connects
+		-l		Listen mode, for inbound connects
+		-n		Suppress name/port resolutions
+		-p port		Specify local port for remote connects
+		-r		Randomize remote ports
+		-s addr		Local source address
+		-t		Answer TELNET negotiation
+		-U		Use UNIX domain socket
+		-u		UDP mode
+		-v		Verbose
+		-w secs		Timeout for connects and final net reads
+		-X proto	Proxy protocol: "4", "5" (SOCKS) or "connect"
+		-x addr[:port]	Specify proxy address and port
+		-z		Zero-I/O mode [used for scanning]
+	Port numbers can be individual or ranges: lo-hi [inclusive]
+
+=== nc to SANS ==========================================================
+
+host$nc www.sans.org 80
+
+GET / HTTP/1.1
+
+HTTP/1.1 400 Bad Request
+Date: Sat, 15 Sep 2012 19:45:12 GMT
+Server: Apache
+Content-Length: 226
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+
