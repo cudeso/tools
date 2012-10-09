@@ -67,7 +67,7 @@ if (is_array($output) and count($output) > 0) {
 			// Build up the array width future "width" of the circles
 			$ipstr = substr($arr_line[1], 0, strpos($arr_line[1], ".") );
 			if ($ip_array[$ipstr]["qt"] == 0) $ip_array[$ipstr]["qt"] = 3;		// Minimal width
-			else if ($ip_array[$ipstr]["qt"] > 99) {
+			else if ($ip_array[$ipstr]["qt"] > 85) {
 				for ($overflow=1;$overflow<=255;$overflow++) {
 					$ip_array[$ipstr]["qt"] = round($ip_array[$ipstr]["qt"] / 2);
 				}
