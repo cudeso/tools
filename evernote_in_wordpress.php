@@ -13,7 +13,7 @@
  */
   
 // When you are changing your theme, the retrieved feed will be cached. You can prevent caching with limiting the lifetime. 
-// Don't use this in a production environement!!
+// Don't use this in a production environment!!
 /*
 function return_1( $seconds ) {
  return 1;
