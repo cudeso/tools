@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<!--
+
+/**
+ *      Simple log file viewer
+ *      Not optimized, every requests downloads the full logfile
+ *
+ *      randval value added in Ajax requests to prevent caching
+ *      call the ajax script with 'action=update' to perform some form of 'updating' on the backend
+ *
+ *      @version 20130419
+ *      @author Koen Van Impe <koen.vanimpe@cudeso.be>
+ *      @license New BSD : http://www.vanimpe.eu/license
+ *
+ */
+
+-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+<div id="request"></div>
+<div id="spinner"></div>
+<div id="log"></div>
+
+<script type="text/javascript" charset="utf-8">
+ $(document).ready(function() {
+
+	$('#spinner').ajaxSend(function(evt, request, settings){
+		$( '#spinner' ).empty().append( "<img src=\"./spinner.gif" + "\" >" );		
+	});
+		
+	// Fetch the Logfile
+	var refreshRequest = setInterval(function() {
+		$.get('logfile-viewer-ajax.php?randval='+ Math.random(), function(data) {
+			$("#log").html(data);
+		});
+	}, 900);
+	$.ajaxSetup({ cache: false });
+	
+	// Execute the syncing
+	$('#request').html('<p>Start ...</p>');
+	$.get('logfile-viewer-ajax.php?action=update&randval='+ Math.random(), function(data) {
+	  $("#request").html(data);
+		clearInterval(refreshRequest);
+		$( '#spinner' ).empty();
+		$('#request').html('<p>Finished.</p>');
+	});
+});
+</script>
+</body>
+</html>
