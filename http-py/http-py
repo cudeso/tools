@@ -1,0 +1,55 @@
+#!/usr/bin/python
+
+
+# Basic script to send manually crafted HTTP headers
+# Koen Van Impe	- 20130530
+
+
+import argparse
+from urlparse import urlparse
+from httplib import HTTPConnection
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--host", "--target-host", help="What host to connect to ", default="localhost")
+parser.add_argument("--script", "--target-script", help="What script to connect to on the target host", default="index.php")
+parser.add_argument("--method", "--http-method", help="HTTP method, POST or GET", default="GET")
+parser.add_argument("--useragent", "--custom-useragent", help="Which useragent to send", default=1)
+parser.add_argument("--cookie", "--header-cookie", help="A list of cookies to add to the header (multiple cookies as 'cookie1=abc;cookie2=def')", default="")
+parser.add_argument("--data", "--url-data", help="Extra data to include in the request", default="")
+
+args = parser.parse_args()
+
+browsers = [	'Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0; GTB7.4; InfoPath.2; SV1; .NET CLR 3.3.69573; WOW64; en-US)' ,
+							'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident/5.0; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 2.0.50727; Media Center PC 6.0)',
+							'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36',
+							'Mozilla/5.0 (Windows; U; Windows NT 5.2; en-GB; rv:1.8.1.18) Gecko/20081029 Firefox/2.0.0.18'
+						]
+
+try:
+	url = "http://" + args.host + "/" + args.script
+	useragent = browsers[args.useragent]
+	data = args.data
+	httpmethod = args.method
+	cookie = args.cookie
+	
+	print "Connect to ", url , " via ", args.method
+	print "==============================================================="
+	
+	headers = {	"Content-type": "application/x-www-form-urlencoded",
+							"Cookie": cookie,
+							"User-Agent": useragent,
+							"Accept": "text/plain"}
+							
+	urlparts = urlparse(url)
+	conn = HTTPConnection(urlparts.netloc, urlparts.port or 80)
+	conn.request( httpmethod , urlparts.path , data , headers)
+
+	response = conn.getresponse()
+
+	print "Reponse from ", url , " : " , response.status, response.reason
+	print "==============================================================="
+	body = response.read()
+	print body
+
+except argparse.ArgumentError, exc:
+	sys.exit()
