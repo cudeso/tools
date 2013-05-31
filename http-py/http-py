@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+# encoding: utf-8
 
 # Basic script to send manually crafted HTTP headers
 # Koen Van Impe	- 20130530
@@ -11,7 +11,7 @@ from httplib import HTTPConnection
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--host", "--target-host", help="What host to connect to ", default="localhost")
-parser.add_argument("--script", "--target-script", help="What script to connect to on the target host", default="index.php")
+parser.add_argument("--script", "--target-script", help="What script to connect to on the target host", default="index.html")
 parser.add_argument("--method", "--http-method", help="HTTP method, POST or GET", default="GET")
 parser.add_argument("--useragent", "--custom-useragent", help="Which useragent to send", default=1)
 parser.add_argument("--cookie", "--header-cookie", help="A list of cookies to add to the header (multiple cookies as 'cookie1=abc;cookie2=def')", default="")
@@ -31,10 +31,7 @@ try:
 	data = args.data
 	httpmethod = args.method
 	cookie = args.cookie
-	
-	print "Connect to ", url , " via ", args.method
-	print "==============================================================="
-	
+		
 	headers = {	"Content-type": "application/x-www-form-urlencoded",
 							"Cookie": cookie,
 							"User-Agent": useragent,
@@ -45,10 +42,12 @@ try:
 	conn.request( httpmethod , urlparts.path , data , headers)
 
 	response = conn.getresponse()
-
+	body = response.read()
+	
+	print "Connect to ", url , " via ", args.method
+	print "==============================================================="
 	print "Reponse from ", url , " : " , response.status, response.reason
 	print "==============================================================="
-	body = response.read()
 	print body
 
 except argparse.ArgumentError, exc:
