@@ -130,7 +130,7 @@ else {
 <body>
 	<h1>Build Google Map from IP data</h1>
 	<div id="uploadcontainer">
-	<form accept-charset="utf-8" method="post" action="convert.php" id="dataform" enctype="multipart/form-data">
+	<form accept-charset="utf-8" method="post" action="index.php" id="dataform" enctype="multipart/form-data">
 
 		<fieldset>
 			<legend>Datafile</legend>
