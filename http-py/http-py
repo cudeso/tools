@@ -12,7 +12,7 @@ from httplib import HTTPConnection
 parser = argparse.ArgumentParser()
 parser.add_argument("--host", "--target-host", help="What host to connect to ", default="localhost")
 parser.add_argument("--script", "--target-script", help="What script to connect to on the target host", default="index.html")
-parser.add_argument("--method", "--http-method", help="HTTP method, POST or GET", default="GET")
+parser.add_argument("--method", "--http-method", help="HTTP method, POST, GET or HEAD", default="GET")
 parser.add_argument("--useragent", "--custom-useragent", help="Which useragent to send", default=1)
 parser.add_argument("--cookie", "--header-cookie", help="A list of cookies to add to the header (multiple cookies as 'cookie1=abc;cookie2=def')", default="")
 parser.add_argument("--data", "--url-data", help="Extra data to include in the request", default="")
