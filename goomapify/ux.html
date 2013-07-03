@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Goomapify, map IPs on a Google Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="assets/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">Goomapify</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Resources <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Team Cymru</a></li>
+                  <li><a href="#">RIPE</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">CERT teams</li>
+                  <li><a href="#">FIRST</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="page-header">
+        <h1>Goomapify <small>Map IP addresses on a <a href="">Google Map</a></small></h1>
+      </div>
+
+    <div class="accordion" id="accordion2">
+      <div class="accordion-group"> 
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseForm">
+            <i class="icon-wrench"></i> Form to submit the dataset
+          </a>
+        </div>
+        <div id="collapseForm" class="accordion-body collapse in">
+
+        <form class="well span11">
+          <div class="row">
+            <div class="alert alert-error span8">
+              Unable to process the provided dataset
+            </div>
+          </div>
+          <div class="row pull-right">
+            <button type="submit" class="btn btn-primary pull-right">Send</button>
+          </div>
+          <div class="row">
+            <fieldset>
+              <div class="span11">
+                <legend>Dataset</legend>
+              </div>
+          		<div class="span5">
+          			<label>Upload datafile</label>
+          			<input type="file" class="span5" name="uploadfile" id="uploadfile" placeholder="Upload dataset">
+          			<h5><small>Upload progress</small></h5>
+          			<div class="progress">
+                  <div class="bar bar-success" style="width: 35%;"></div>
+                  <div class="bar bar-warning" style="width: 20%;"></div>
+                  <div class="bar bar-danger" style="width: 10%;"></div>
+                </div>
+          		</div>
+          		<div class="span5 offset1">
+          			<label>Provide a dataset</label>
+          			<textarea name="uploaddataset" id="uploaddataset" class="input-xlarge span5" rows="4"></textarea>
+          			<span class="label label-info">One IP address per line, IPv4 only</span>
+          		</div>
+        		</fieldset>          	
+        	</div>
+                
+          <br /><br />
+          
+          <div class="row">
+        		<fieldset>
+              <div class="span11">
+                <legend>Map options</legend>
+              </div>
+              <div class="span5">
+                <label>Map title</label>
+          			<input type="text" class="span5" name="maptitle" id="maptitle" placeholder="Provide your map title">
+                <label>Center on</label>
+                <select id="mapcenter" name="mapcenter">
+                  <option value="brussels" selected="selected">Brussels</option>
+                  <option value="paris">Paris</option>
+                  <option value="amsterdam">Amsterdam</option>
+                </select>        
+                <label>Map type</label>
+                <select id="maptype" name="maptype">
+                  <option value="satellite" selected="selected">Satellite</option>
+                  <option value="terrain">Terrain</option>
+                  <option value="roadmap">Roadmap</option>
+                </select>
+                
+              </div>
+              <div class="span5 offset1">
+                <label>Map width and length</label>
+                <input value="1024" type="text" class="span2" name="mapwidth" id="mapwidth" placeholder="Width">
+                <input value="800" type="text" class="span2" name="maplength" id="maplength" placeholder="Length">
+                <label>Marker types</label>
+                <select id="markertype" name="markertype">
+                  <option value="markers" selected="selected">Markers</option>
+                  <option value="heatmap">Heatmap</option>
+                  <option value="circles">Circles</option>
+                </select>                
+              </div>
+            </fieldset>              
+          </div>
+      		
+      		<br /><br />
+          
+          <div class="row">
+        		<fieldset>
+              <div class="span11">
+                <legend>Data process options</legend>
+              </div>
+              <div class="span5">
+                <label class="checkbox span5">
+                      <input type="checkbox" id="enrichwhois" name="enrichwhois" > Enrich with Whois data
+                      <span class="label label-warning">Querying external whois services can take a while</span>
+                </label>
+                <label class="checkbox span5">
+                      <input type="checkbox" id="externaljson" name="externaljson" > Create external (reusable) JSON file
+                </label>                              
+              </div>
+              <div class="span5 offset1">
+                <label class="checkbox span5">
+                      <input type="checkbox" id="textsummary" name="textsummary" > Include text summary
+                </label>
+              </div>
+                   
+            </fieldset>
+          </div>
+        </form>
+
+        </div>
+
+
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseMap">
+            <i class="icon-globe"></i> Google Map
+          </a>
+        </div>
+        <div id="collapseMap" class="accordion-body collapse">
+          <div class="text-left span11">
+            <button class="btn btn-small btn-info" type="button">Save HTML code of Google Map to static page</button> <span class="label label-important">The HTML will be available as the <strong>unique URL_A_B_C</strong></span>
+          </div>
+          <br /><br />
+          <div class="text-center">
+            <img src="http://placehold.it/1024x600" />
+          </div>
+        </div>
+
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTextSummary">
+            <i class="icon-tasks"></i> Text summary
+          </a>
+        </div>
+        <div id="collapseTextSummary" class="accordion-body collapse">
+          <div class="text-left span11">
+            <button class="btn btn-small btn-success" type="button">Download report</button>
+          </div>
+          <br /><br />          
+          <div class="text-center span11">
+            <table class="table table-hover">
+              <tr>
+                <th>#</th><th>CC</th><th>Country</th>
+              </tr>
+              <tr class="success"><td>50</td><td>AB</td><td>ABCountry</td></tr>
+              <tr><td>50</td><td>AB</td><td>ABCountry</td></tr>
+              <tr class="success"><td>50</td><td>AB</td><td>ABCountry</td></tr>
+              <tr><td>50</td><td>AB</td><td>ABCountry</td></tr>
+              <tr><td>50</td><td>AB</td><td>ABCountry</td></tr>                                                        
+            </table>
+          </div>
+        </div>
+                
+      </div>
+    </div>
+
+    </div> <!-- /container -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
