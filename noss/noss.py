@@ -15,145 +15,309 @@
 #   license New BSD : http://www.vanimpe.eu/license
 #
 #
-# 1. First run with "-i" to init the database
-# 2. Then run with "-n" to parse the XML file
-# 3. Use -r to regenerate the report
 #
 
 
 import sys
 import os
-import getopt
 import xml.dom.minidom
 import datetime, time
 import sqlite3
 import argparse
+from commands import getstatusoutput
 
 DATABASE = "noss.db"
 DATABASE_SQL = "noss.sql"
 APP_NAME = "NMAP Open Service Scan"
 APP_VERSION = "0.1"
-
+DEFAULT_NMAP = "noss"
+DEFAULT_NMAP_XML = DEFAULT_NMAP + ".xml"
+DEFAULT_CLEANUPS = 5
+DEFAULT_SCAN_TARGET="127.0.0.1"
 
 '''
  Main function, parse the app arguments
 '''
 def main():
-  parser = argparse.ArgumentParser(description='Scan and report the open resolvers (or any other network service) in your network.', epilog='Koen Van Impe - koen dot vanimpe at cudeso dot be', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-  parser.add_argument('-n', '--nmap-xml', help="Process data from this NMAP input file (in XML format)")
-  parser.add_argument('-r', '--report', help="Generate the report", action="store_true", default=False)
-  parser.add_argument('-rh', '--history', help="Include the history in a report", action="store_true", default=False)  
-  parser.add_argument('-d', '--database' , help="Database to use", default= DATABASE )
-  parser.add_argument('-c', '--clean', help="Remove the older session data", default=0,const=5, type=int, nargs="?")
-  parser.add_argument('-i', '--init' , help="Init the database", action="store_true", default=False)
-  parser.add_argument('-x', '--empty', help="Empty the database, removing all session data", action="store_true", default=False)
-  parser.add_argument('-s', '--sessions', help="Return number of sessions", action="store_true", default=False)
-  parser.add_argument('-l', '--list-sessions', help="List the sessions", action="store_true", default=False)  
-  parser.add_argument('-g', '--get-stats', help="Return statistics on the database", action="store_true", default=False)  
-  #parser.add_argument('-dns', '--dns-open-resolver', help="Check for open resolvers", action="store_true", default=True)
-  args = parser.parse_args()
   
+  global conn, cursor
+  
+  parser = argparse.ArgumentParser('parser', description='Scan and report the open resolvers (or any other network service) in your network.', epilog='Koen Van Impe - koen.vanimpe@cudeso.be', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+  
+  parser.add_argument('-d', '--database' , help="Database to use", default=DATABASE)
+    
+  subparsers = parser.add_subparsers(title='Command switches', description='NOSS has a couple of command switches that tell it what you want it to do', dest='action')
+
+  parser_import = subparsers.add_parser('import', help='Import data from external sources (NMAP)')
+  parser_scan = subparsers.add_parser('scan', help='Launch a scan (NMAP)')
+  parser_report = subparsers.add_parser('report', help='Build different reports')
+  parser_stats = subparsers.add_parser('stats', help='Return statistics on the content of the database')
+  parser_clean = subparsers.add_parser('clean', help='Clean the database')
+  parser_init = subparsers.add_parser('init', help='Initialize the database')
+  parser_empty = subparsers.add_parser('empty', help='Empty the database')
+        
+  parser_import.add_argument('-n', '--nmap-xml', help="The NMAP XML import file", default=DEFAULT_NMAP_XML)
+
+  parser_clean.add_argument('-c', '--cleanups', help="Remove the older session data", default=DEFAULT_CLEANUPS, type=int, nargs="?")
+
+  parser_report.add_argument('-s', '--sessions', help="Return the number of sessions", action="store_true", default=False)
+  parser_report.add_argument('-l', '--sessions-list', help="List the sessions", action="store_true", default=False)
+  parser_report.add_argument('-L', '--sessions-list-detail', help="List the sessions, with script-id", action="store_true", default=False)
+  parser_report.add_argument('-D', '--sessions-dump', help="Print all the sessions", action="store_true", default=False)  
+  parser_report.add_argument('-S', '--sessions-detail', help="Dump raw details of a session", type=int, default=False, nargs="?")
+      
+  parser_report.add_argument('-rh', '--report-history', help="Include the history in a report", action="store_true", default=False)
+  parser_report.add_argument('-rd', '--report-dns', help="Report on open DNS resolvers", action="store_true", default=True)
+  parser_report.add_argument('-ra', '--report-all', help="Report on all ports", action="store_true", default=False)  
+  parser_report.add_argument('-rs', '--report-session', help="Report on this session", type=int)
+  parser_report.add_argument('-rq', '--report-quick', help="Quick report (hostname + timestamp)", action="store_true", default=False)
+  parser_report.add_argument('-rc', '--report-csv', help="Report with data in CSV format", action="store_true", default=False)
+  
+  parser_scan.add_argument('-sd', '--scan-dns', help="Scan for open DNS resolvers", action="store_true", default=False)
+  parser_scan.add_argument('-sn', '--scan-snmp', help="Scan for SNMP servers'", action="store_true", default=False)
+  parser_scan.add_argument('-sh', '--scan-http', help="Scan for HTTP servers", action="store_true", default=False)  
+  parser_scan.add_argument('-t', '--scan-target', help="Target to scan", default=DEFAULT_SCAN_TARGET)    
+  parser_scan.add_argument('-o', '--output-file', help="The NMAP export base filename", default=DEFAULT_NMAP)
+    
   printHeader()
 
-  db = args.database
-
-  global conn, cursor
-
-  if os.path.isfile( db ):
-    conn = sqlite3.connect( db )       
-    cursor = conn.cursor()
+  if len(sys.argv)==1:
+    parser.print_help()
+    sys.exit(1)
+  args=parser.parse_args()  
   
-  if args.init == True:
-    '''
-    Initialize the database
-    '''    
-    try:
-      sql = open( DATABASE_SQL, "r").read() 
-      conn = sqlite3.connect( db )       
-      cursor = conn.cursor()      
-      cursor.executescript( sql )   
-      print "\nInitialize database : OK"
-      print "  %s with %s " % (db, DATABASE_SQL)
-    except sqlite3.Error, e:
-      print "\nInitialize database : FAIL"
-      print "Database error while initializing." 
-    except:
-      print "\nInitialize database : FAIL"      
-      print "Unable to read the SQL file (%s) or initialize the database." % DATABASE_SQL
-  else:
-    '''
-    Do not initialize, check if the provided file is a sqlite database
-    '''
-    try:
-      cursor.execute("SELECT hostname FROM hosts LIMIT 1")
-    except:
-      print "\nUnable to access %s. Not a sqlite file or file does not exist?" % db
-      sys.exit(1)
-      
-    if args.empty == True:
-      '''
-      Empty the database
-      '''
-      if emptyDb():
-        print "\nEmpty database : OK"
-      else:
-        print "\nEmpty database : FAIL"
+  db = DATABASE
+  if args.database is not None:
+    db = args.database
 
+    if args.action == "init":
+      try:
+        sql = open( DATABASE_SQL, "r").read() 
+        conn = sqlite3.connect( db )       
+        cursor = conn.cursor()      
+        cursor.executescript( sql )   
+        print "\nInitialized the database %s, based on the SQL script %s" % (db, DATABASE_SQL)
+      except sqlite3.Error, e:
+        print "\nFailed to initialize the database %s, based on the SQL script %s" % (db, DATABASE_SQL)
+        print "Database error %s" % e.args[0]
+        sys.exit(1)
+      except:
+        print "\nFailed to initialize the database %s, based on the SQL script %s" % (db, DATABASE_SQL)
+        sys.exit(1)        
+    else:
+      try:
+        if os.path.isfile( db ):
+          conn = sqlite3.connect( db )       
+          cursor = conn.cursor()
+          cursor.execute("SELECT hostname FROM hosts LIMIT 1")
 
-    # Clean the database
-    if args.clean > 0:
-      print "no clean"
-      # runCleanup( args.clean )
-
-    # Import XML file
-    if args.nmap_xml is not None:
-      print "\nProcessing XML file %s " % args.nmap_xml
-      parseNmapXml( args.nmap_xml )
-      print "Finished processing XML file"
-
-    # Get database statistics
-    if args.get_stats == True and args.empty == False:
-      printStats()
-      
-    # List the different sessions
-    if args.list_sessions == True and args.empty == False:
-      print "\nList all the sessions"
-      listSessions()
+        try:
+          if cursor:
+            # error raised when getting cursor?
+            print ""
+        except:
+          printNodb()
+          sys.exit(1)
           
-    # Count the number of sessions
-    if args.sessions == True and args.empty == False:
-      print "\nSession count : %s." % str(countSessions())
+        if args.action == "import":
+          '''
+          IMPORT of an NMAP file
+          '''          
+          nmap_xml = DEFAULT_NMAP_XML
+          if args.nmap_xml is not None:
+            nmap_xml = args.nmap_xml
+
+          parseNmapXml( nmap_xml )
+          printStats( "last" )
+          
+        elif args.action == "stats":
+          '''
+          STATS of the database
+          '''
+          printStats()
+
+        elif args.action == "empty":
+          '''
+          EMPTY the database
+          '''
+          if emptyDb():
+            print "\nEmpty database : OK"
+          else:
+            print "\nEmpty database : FAIL"
+
+        elif args.action == "clean":
+          '''
+          CLEAN older sessions in the database
+          '''          
+          cleanups = DEFAULT_CLEANUPS
+          if args.cleanups is not None:
+            cleanups = args.cleanups
+          runCleanup( cleanups )
+          
+        elif args.action == "scan":
+          '''
+          Scan
+          '''
+          print "\nLaunch a scan (you will need 'root' or 'sudo' privileges)"
+
+          output_file = DEFAULT_NMAP
+          if args.output_file is not None:
+            output_file = args.output_file
+          ports = ""
+          if args.scan_dns == True:
+            scripts = " --script 'dns-recursion' "
+            ports = "53"
+            print " - dns-recursion"
+          if args.scan_snmp == True:
+            scripts = scripts + " --script 'snmp-sysdescr'"
+            ports = ports + ",161"
+            print " - snmp-sysdescr"            
+          if args.scan_http == True:
+            scripts = scripts + " --script 'html-title'"
+            ports = ports + ",80"  
+            print " - html-title"
+          if ports != "":        
+            target = args.scan_target
+            print " towards : ", target
+            startScan(output_file, ports, scripts, target)
+          else:
+            print " No ports to scan"
+          
+        elif args.action == "report":
+          '''
+          Build a report
+          '''
+          if args.sessions == True:
+            '''
+            REPORT, return the number of sessions
+            '''
+            print "\nNumber of sessions in database : %s " % str(countSessions())
+          elif args.sessions_list == True:
+            '''
+            REPORT, list the sessions
+            '''
+            print "\nList the sessions"
+            listSessions()
+          elif args.sessions_list_detail == True:
+            '''
+            REPORT, list the sessions, detailed
+            '''
+            print "\nList the sessions (detailed view)"
+            listSessions( "detail" )
+          elif args.sessions_dump == True:
+            '''
+            REPORT, list the sessions, dump
+            '''
+            print "\nList the sessions (dump view)"            
+            listSessions( "dump" )
+          elif args.sessions_detail is None or  args.sessions_detail > 0:
+            '''
+            REPORT, list details of one session
+            '''
+            session_detail = args.sessions_detail
+            print "\nList details of session %s" % session_detail
+            dumpSession( session_detail )
+          else:
+            '''
+            REPORT
+            '''
+            if args.report_session is not None:
+              session = args.report_session
+            else:
+              session = maxSession()
+
+            if args.report_quick == True:
+              report_history = False
+              report_quick = True
+            else:
+              report_quick = False
+              if args.report_history == True:
+                report_history = True
+              else:
+                report_history = False
+              
+            if args.report_all == True:
+              service_name = "%"
+              portid = 0
+              protocol = "%"
+              script_id = "%"
+              script_output = "%"
+              
+            elif args.report_dns == True:
+              service_name = "domain"
+              portid = 53
+              protocol = "udp"
+              script_id = "dns-recursion"
+              script_output = "Recursion appears to be enabled"
+              
+            if portid > 0 or service_name == "%":
+              buildReport( report_history, report_quick, args.report_csv, service_name, portid, protocol, script_id, script_output, session)
+            else:
+              print "No report type given"
+    
+      except:
+        print "Unable to access the database %s" % db
+        #print "\n",sys.exc_info()
+        sys.exit(1)
+
+
+          
+'''
+ Comment
+'''
+'''
+ Launch a scan
+'''
+def startScan(output_file, ports, scripts, target):
+  print " nmap -sU -sS -sV -oA ",output_file , " -p ", ports , " " , scripts , " " , target
+  print getstatusoutput("nmap -sU -sS -sV -oA " + output_file + " -p " + ports + " " + scripts + " " + target)
+
+
+  
+'''
+ Dump the details of a session
+'''
+def dumpSession( session_detail ):
+  if session_detail > 0:
+    rows_script = None
+    cursor.execute("SELECT hosts.ip, hosts.hostname, ports.portid, ports.protocol, ports.state, ports.script_id, ports.script_output, hosts.starttime, ports.service_name, ports.service_product, ports.service_version FROM hosts, ports WHERE hosts.ip = ports.ip AND ports.session = ?",  [session_detail])
+    rows_script = cursor.fetchall()
+    for row_script in rows_script:
+      int_starttime = int( row_script[7] )
+      str_starttime = datetime.datetime.fromtimestamp(int_starttime).strftime('%Y-%m-%d %H:%M:%S') 
       
-    # Generate a report
-    if args.report == True and args.empty == False:
-      service_name = "domain"
-      portid = 53
-      protocol = "udp"
-      script_id = "dns-recursion"
-      script_output = "Recursion appears to be enabled"
-      buildReport( args.history, service_name, portid, protocol, script_id, script_output)
-      
-  conn.close()
+      hostname = row_script[0]
+      if hostname is None:
+        hostname = "-" 
+      print "%s \t %s \t %s \t%s/%s (%s %s %s %s) \n\t\t%s\t%s" % (str_starttime, hostname, row_script[1], row_script[3], row_script[2], row_script[4], row_script[8], row_script[9], row_script[10], row_script[5], row_script[6])
+  else:
+    print "No data found"
 
 
 
 '''
  Get database statistics
 '''
-def printStats():
+def printStats( stat_type = "all" ):
+  if stat_type == "last":
+    print "\nStatistics for the last session :"
+    extra_sql = " WHERE session = " + str(maxSession())
+  else:
+    print "\nGlobal statistics :"    
+    extra_sql = ""    
+    
   try:
-    print "\nStatistics :"
-    cursor.execute("SELECT COUNT(*) AS qt FROM hosts")
+    cursor.execute("SELECT COUNT(*) AS qt FROM hosts" + extra_sql)
     row = cursor.fetchone()
     if row is not None:
       print " Records in hosts table : %s" % int(row[0])
  
-    cursor.execute("SELECT COUNT(*) AS qt FROM ports")
+    cursor.execute("SELECT COUNT(*) AS qt FROM ports" + extra_sql)
     row = cursor.fetchone()
     if row is not None:
       print " Records in ports table : %s" % int(row[0])
       
-    cursor.execute("SELECT COUNT(DISTINCT ip) AS qt FROM hosts")
+    cursor.execute("SELECT COUNT(DISTINCT ip) AS qt FROM hosts" + extra_sql)
     row = cursor.fetchone()
     if row is not None:
       print " Unique IPs : %s" % int(row[0])
@@ -164,8 +328,8 @@ def printStats():
     print "Error while generating the statistics : %s:" % e.args[0]
     sys.exit(1)
 
-  
-  
+
+
 '''
  Insert a record found in the read file
 '''
@@ -225,15 +389,20 @@ def insertRecord( session, ip, hostname, hostprotocol, starttime, endtime, porti
  Parse the NMAP XML file into different variables
 '''
 def parseNmapXml( nmapfile ):
+  
+  print "\nImport : processing XML file %s" % nmapfile
+  
   try:
     doc = xml.dom.minidom.parse(nmapfile)
     session = maxSession() + 1
   except IOError:
-    print "Error: file \"%s\" doesn't exist." % (nmapfile)
+    print "Error: file %s doesn't exist" % (nmapfile)
     return False
   except xml.parsers.expat.ExpatError:
-    print "Error: file \"%s\" doesn't seem to be XML." % (nmapfile)
+    print "Error: file %s doesn't seem to be XML" % (nmapfile)
     return False
+  except:
+    print "Error while processing %s" % (nmapfile)
 
   for host in doc.getElementsByTagName("host"):
     try:
@@ -304,7 +473,8 @@ def parseNmapXml( nmapfile ):
               script_output = ""
 
             insertRecord( session, ip, hostname, hostprotocol, starttime, endtime, portid, protocol, state, service_name, service_product, service_version, service_extra, script_id, script_output)
-
+  print "Finished processing XML file %s" % nmapfile
+  
 
 
 ''' 
@@ -339,24 +509,43 @@ def countSessions():
 
 
 
-
 '''
  List all the sessions, with first timestamp
 '''
-def listSessions():
+def listSessions( type = 'basic' ):
+  if type != 'basic' and type != "detail" and type != "dump":
+    type = "basic"
+      
   try:
     cursor.execute("SELECT DISTINCT(session), starttime FROM hosts ORDER BY starttime ASC")
     rows = cursor.fetchall()
     for row in rows:
-      int_latest_tstamp = int( row[1] )
-      str_latest_tstamp = datetime.datetime.fromtimestamp(int_latest_tstamp).strftime('%Y-%m-%d %H:%M:%S') 
-      print " Session %s : %s" % (row[0], str_latest_tstamp)
+      int_starttime = int( row[1] )
+      str_starttime = datetime.datetime.fromtimestamp(int_starttime).strftime('%Y-%m-%d %H:%M:%S') 
+      print " Session %s : %s" % (row[0], str_starttime)
+      if type == "detail":
+        cursor.execute("SELECT DISTINCT(script_id) AS s, count(*) AS qt FROM ports WHERE session = ? GROUP BY script_id ORDER BY qt DESC", [row[0]])
+        rows_script = cursor.fetchall()
+        for row_script in rows_script:
+          script_id = row_script[0]
+          if script_id == "":
+            script_id = "<no script provided>"
+          print "   %sx %s " % (row_script[1], script_id)
+      elif type == "dump":
+        cursor.execute("SELECT hosts.ip, hosts.hostname, ports.portid, ports.protocol, ports.state, ports.script_id, ports.script_output FROM hosts, ports WHERE hosts.ip = ports.ip AND ports.session = ?",  [row[0]])
+        rows_script = cursor.fetchall()
+        for row_script in rows_script:
+          hostname = row_script[0]
+          if hostname is None:
+            hostname = "-" 
+          print "   %s - %s " % (hostname, row_script[1])          
+         
   except sqlite3.Error, e:
     print "Error while listing sessions : %s:" % e.args[0]
     sys.exit(1)
-    
-  
-  
+
+
+
 '''
  Delete older data sets
 '''
@@ -389,7 +578,7 @@ def runCleanup( keepruns):
   else:
    emptyDb()
    return False
-
+   
 
 
 '''
@@ -409,7 +598,7 @@ def maxSession():
     else:
       return 0
   except sqlite3.Error, e:
-    print "Error %s:" % e.args[0]
+    print "Database error %s " % e.args[0]
     sys.exit(1)   
 
 
@@ -417,48 +606,66 @@ def maxSession():
 '''
  Build a report
 '''
-def buildReport( history, service_name, portid, protocol, script_id, script_output):
-  
-  print "\nReport generation for : %s %s/%s " % (service_name, portid, protocol)
-  print " Script %s , verifying for output %s" % (script_id, script_output)
+def buildReport( history, report_quick, report_csv, service_name, portid, protocol, script_id, script_output, session):
+  if portid == 0 and service_name == "%":
+    print "\nReport generation for all ports and protocols"
+    print " Session : %s" % session
+    print " All scripts"
+  else:
+    print "\nReport generation for : %s %s/%s " % (service_name, portid, protocol)
+    print " Session : %s" % session
+    print " Script %s , verifying for output %s" % (script_id, script_output)
   try:
-    # Get latest session
-    session = maxSession()
-    cursor.execute("SELECT starttime FROM hosts WHERE session = ? ORDER BY starttime DESC LIMIT 1", [session])
-    row = cursor.fetchone()
-    if row is not None:
-      latest_tstamp = row[0]
-      int_latest_tstamp = int( latest_tstamp )
-      str_latest_tstamp = datetime.datetime.fromtimestamp(int_latest_tstamp).strftime('%Y-%m-%d %H:%M:%S') 
-      print "\nData for : %s " % (str_latest_tstamp)
-      cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? AND ports.portid = ? AND ports.protocol = ? AND ports.script_id = ? AND ports.script_output = ? ORDER BY hosts.hostname ASC, hosts.ip", ( session, portid, protocol, script_id, script_output)) 
-      activehosts = cursor.fetchall()
-      if activehosts is not None:
-        for activehost in activehosts:
-          service_version = ""
-          service_product = ""
-          if activehost[3] is not None:
-            service_product =  activehost[3]
-          if activehost[4] is not None:
-            service_version = activehost[4]
-           
-          print " %s (%s) - %s - %s %s" % (activehost[0], activehost[1], activehost[2],service_product, service_version)
-          if history:
-            cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, hosts.tstamp,ports.service_product, ports.service_version FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.tstamp = ports.tstamp AND hosts.tstamp != ? AND hosts.ip = ? AND ports.portid = ? AND ports.protocol = ? AND ports.script_id = ? AND ports.script_output = ? ORDER BY hosts.tstamp DESC, hosts.hostname ASC, hosts.ip", ( latest_tstamp, activehost[0], portid, protocol, script_id, script_output)) 
-            historyhosts = cursor.fetchall()
-            if historyhosts is not None:
-              for historyhost in historyhosts:
-                int_history = int( historyhost[3] )
-                str_history = datetime.datetime.fromtimestamp(int_history).strftime('%Y-%m-%d %H:%M:%S')
-                service_version = ""
-                service_product = ""
-                if historyhost[4] is not None:
-                 service_product =  activehost[3]
-                if historyhost[5] is not None:
-                 service_version = activehost[4]
-                print "   \_ Also on %s - %s (%s) %s %s" % (str_history, historyhost[0], historyhost[1], service_product, service_version) 
-      else:
-        print "\nNo active hosts found." 
+    if portid == 0 and service_name == "%":
+      cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? GROUP BY ports.portid,ports.protocol ORDER BY hosts.hostname ASC, hosts.ip", [session]) 
+    else:
+      cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? AND ports.portid = ? AND ports.protocol = ? AND ports.script_id = ? AND ports.script_output = ? ORDER BY hosts.hostname ASC, hosts.ip", ( session, portid, protocol, script_id, script_output)) 
+    activehosts = cursor.fetchall()
+    if activehosts is not None:
+      print"\n-------------------------------------"
+      for activehost in activehosts:
+        service_version = ""
+        service_product = ""
+        if activehost[3] is not None:
+          service_product =  activehost[3]
+        if activehost[4] is not None:
+          service_version = activehost[4]
+
+        starttime = activehost[5]
+        int_starttime = int( starttime )
+        str_starttime = datetime.datetime.fromtimestamp(int_starttime).strftime('%Y-%m-%d %H:%M:%S') 
+
+        if report_quick == True:
+          if report_csv == True:
+            print "%s,%s" % (str_starttime, activehost[0])
+          else:
+            print "%s \t%s" % (str_starttime, activehost[0])
+        else:
+          if report_csv == True:
+            print "%s,%s,%s,%s,%s,%s,%s,%s" % (str_starttime, activehost[0], activehost[1], activehost[7], activehost[8], activehost[2],service_product, service_version)
+          else:
+            print " %s %s (%s) %s/%s \t %s \t %s \t %s" % (str_starttime, activehost[0], activehost[1], activehost[7], activehost[8], activehost[2],service_product, service_version)
+
+        if history:
+          if portid == 0 and service_name == "%":
+            cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, hosts.starttime,ports.service_product, ports.service_version FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.starttime != ? AND hosts.ip = ? AND ports.portid = ? AND ports.protocol = ? AND hosts.session != ? GROUP BY hosts.starttime ORDER BY hosts.starttime DESC, hosts.hostname ASC, hosts.ip", ( int_starttime, activehost[0], activehost[7], activehost[8], session))
+          else:
+            cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, hosts.starttime,ports.service_product, ports.service_version FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.starttime != ? AND hosts.ip = ? AND ports.portid = ? AND ports.protocol = ? AND ports.script_id = ? AND ports.script_output = ?  AND hosts.session != ? GROUP BY hosts.starttime ORDER BY hosts.starttime DESC, hosts.hostname ASC, hosts.ip", ( int_starttime, activehost[0], portid, protocol, script_id, script_output, session)) 
+          historyhosts = cursor.fetchall()
+          if historyhosts is not None:
+            for historyhost in historyhosts:
+              int_history = int( historyhost[3] )
+              str_history = datetime.datetime.fromtimestamp(int_history).strftime('%Y-%m-%d %H:%M:%S')
+              service_version = ""
+              service_product = ""
+              if historyhost[4] is not None:
+               service_product =  activehost[3]
+              if historyhost[5] is not None:
+               service_version = activehost[4]
+              if report_csv == True:
+                print "-----,%s,%s,%s,%s,%s,%s,%s" % (str_history, historyhost[0], historyhost[1], activehost[7], activehost[8], service_product, service_version) 
+              else:
+                print "   \_ Also on %s - %s (%s) %s/%s \t %s \t %s" % (str_history, historyhost[0], historyhost[1], activehost[7], activehost[8], service_product, service_version) 
   
   except sqlite3.Error, e:
     print "Error %s:" % e.args[0]
@@ -467,13 +674,22 @@ def buildReport( history, service_name, portid, protocol, script_id, script_outp
 
 
 '''
+ Print the no database error
+'''
+def printNodb():
+  print "\nCould not access the database. Init the database with ./noss.py init"  
+
+
+
+'''
  Print the output header
 '''
 def printHeader():
   print "\n************************************"  
-  print APP_NAME, APP_VERSION
+  print " ",APP_NAME, APP_VERSION
   print "************************************"
-  
+
+
 
 '''
  Jump to the main function
