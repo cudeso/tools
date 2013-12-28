@@ -1,0 +1,5 @@
+NOSS, NMAP Open Service Scan
+
+NOSS can launch an nmap scan for you, it can store the results in a database and it can provide reports, with history. NOSS allows you to scan for open resolvers but it can also scan for SNMP servers (udp/161) and web servers (tcp/80).
+
+More info : http://www.vanimpe.eu/2013/12/28/nmap-open-service-scan-open-resolver-test/
