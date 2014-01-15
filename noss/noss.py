@@ -68,12 +68,14 @@ def main():
       
   parser_report.add_argument('-rh', '--report-history', help="Include the history in a report", action="store_true", default=False)
   parser_report.add_argument('-rd', '--report-dns', help="Report on open DNS resolvers", action="store_true", default=True)
+  parser_report.add_argument('-rz', '--report-dns-zone', help="Report on DNS resolvers allowing zone transfers", action="store_true", default=False) 
   parser_report.add_argument('-ra', '--report-all', help="Report on all ports", action="store_true", default=False)  
   parser_report.add_argument('-rs', '--report-session', help="Report on this session", type=int)
   parser_report.add_argument('-rq', '--report-quick', help="Quick report (hostname + timestamp)", action="store_true", default=False)
   parser_report.add_argument('-rc', '--report-csv', help="Report with data in CSV format", action="store_true", default=False)
   
   parser_scan.add_argument('-sd', '--scan-dns', help="Scan for open DNS resolvers", action="store_true", default=False)
+  parser_scan.add_argument('-sz', '--scan-dns-zone', help="Scan for DNS resolvers allowing zone transfers", action="store_true", default=False)
   parser_scan.add_argument('-sn', '--scan-snmp', help="Scan for SNMP servers'", action="store_true", default=False)
   parser_scan.add_argument('-sh', '--scan-http', help="Scan for HTTP servers", action="store_true", default=False)  
   parser_scan.add_argument('-t', '--scan-target', help="Target to scan", default=DEFAULT_SCAN_TARGET)    
@@ -164,22 +166,35 @@ def main():
           if args.output_file is not None:
             output_file = args.output_file
           ports = ""
+          scripts = ""
           if args.scan_dns == True:
             scripts = " --script 'dns-recursion' "
             ports = "53"
             print " - dns-recursion"
           if args.scan_snmp == True:
-            scripts = scripts + " --script 'snmp-sysdescr'"
-            ports = ports + ",161"
+            scripts = scripts + " --script 'snmp-sysdescr' "
+            if ports:
+              ports = ports + ","
+            ports = ports + "161"
             print " - snmp-sysdescr"            
           if args.scan_http == True:
-            scripts = scripts + " --script 'html-title'"
-            ports = ports + ",80"  
+            scripts = scripts + " --script 'html-title' "
+            if ports:
+              ports = ports + ","            
+            ports = ports + "80"  
             print " - html-title"
+          if args.scan_dns_zone == True:
+            scripts = scripts + " --script 'dns-zone-transfer' "
+            if ports:
+              ports = ports + ","            
+            ports = ports + "53"
+            print " - dns-zone-transfer"
+
           if ports != "":        
             target = args.scan_target
             print " towards : ", target
             startScan(output_file, ports, scripts, target)
+            print "\nScan finished and results written to %s.xml (not yet imported). Import the data with 'import'" % output_file
           else:
             print " No ports to scan"
           
@@ -235,21 +250,26 @@ def main():
                 report_history = True
               else:
                 report_history = False
-              
+
             if args.report_all == True:
               service_name = "%"
               portid = 0
               protocol = "%"
               script_id = "%"
               script_output = "%"
-              
+            elif args.report_dns_zone == True:
+              service_name = "domain"
+              portid = 53
+              protocol = "tcp"
+              script_id = "dns-zone-transfer"
+              script_output = "%"
             elif args.report_dns == True:
               service_name = "domain"
               portid = 53
               protocol = "udp"
               script_id = "dns-recursion"
               script_output = "Recursion appears to be enabled"
-              
+
             if portid > 0 or service_name == "%":
               buildReport( report_history, report_quick, args.report_csv, service_name, portid, protocol, script_id, script_output, session)
             else:
@@ -619,9 +639,9 @@ def buildReport( history, report_quick, report_csv, service_name, portid, protoc
     if portid == 0 and service_name == "%":
       cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? GROUP BY ports.portid,ports.protocol ORDER BY hosts.hostname ASC, hosts.ip", [session]) 
     else:
-      cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? AND ports.portid = ? AND ports.protocol = ? AND ports.script_id = ? AND ports.script_output = ? ORDER BY hosts.hostname ASC, hosts.ip", ( session, portid, protocol, script_id, script_output)) 
+      cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? AND ports.portid = ? AND ports.protocol = ? AND ports.script_id LIKE ? AND ports.script_output LIKE ? ORDER BY hosts.hostname ASC, hosts.ip", ( session, portid, protocol, script_id, script_output)) 
     activehosts = cursor.fetchall()
-    if activehosts is not None:
+    if activehosts is not None and len(activehosts) > 0:
       print"\n-------------------------------------"
       for activehost in activehosts:
         service_version = ""
@@ -666,7 +686,9 @@ def buildReport( history, report_quick, report_csv, service_name, portid, protoc
                 print "-----,%s,%s,%s,%s,%s,%s,%s" % (str_history, historyhost[0], historyhost[1], activehost[7], activehost[8], service_product, service_version) 
               else:
                 print "   \_ Also on %s - %s (%s) %s/%s \t %s \t %s" % (str_history, historyhost[0], historyhost[1], activehost[7], activehost[8], service_product, service_version) 
-  
+    else:
+      print "No hosts match the search"
+      
   except sqlite3.Error, e:
     print "Error %s:" % e.args[0]
     sys.exit(1)
