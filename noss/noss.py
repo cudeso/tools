@@ -637,7 +637,7 @@ def buildReport( history, report_quick, report_csv, service_name, portid, protoc
     print " Script %s , verifying for output %s" % (script_id, script_output)
   try:
     if portid == 0 and service_name == "%":
-      cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? GROUP BY ports.portid,ports.protocol ORDER BY hosts.hostname ASC, hosts.ip", [session]) 
+      cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? GROUP BY hosts.ip, ports.portid,ports.protocol ORDER BY hosts.hostname ASC, hosts.ip", [session]) 
     else:
       cursor.execute("SELECT hosts.ip, hosts.hostname, ports.script_output, ports.service_product, ports.service_version, hosts.starttime, hosts.endtime,ports.portid, ports.protocol, ports.script_id FROM hosts, ports WHERE hosts.ip = ports.ip AND hosts.session = ports.session AND hosts.session = ? AND ports.portid = ? AND ports.protocol = ? AND ports.script_id LIKE ? AND ports.script_output LIKE ? ORDER BY hosts.hostname ASC, hosts.ip", ( session, portid, protocol, script_id, script_output)) 
     activehosts = cursor.fetchall()
