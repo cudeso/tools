@@ -34,6 +34,8 @@ DEFAULT_NMAP = "noss"
 DEFAULT_NMAP_XML = DEFAULT_NMAP + ".xml"
 DEFAULT_CLEANUPS = 5
 DEFAULT_SCAN_TARGET="127.0.0.1"
+#NMAP_LOCATION="/usr/bin/nmap"
+NMAP_LOCATION="/usr/local/nmap/bin/nmap"
 
 '''
  Main function, parse the app arguments
@@ -69,6 +71,8 @@ def main():
   parser_report.add_argument('-rh', '--report-history', help="Include the history in a report", action="store_true", default=False)
   parser_report.add_argument('-rd', '--report-dns', help="Report on open DNS resolvers", action="store_true", default=True)
   parser_report.add_argument('-rz', '--report-dns-zone', help="Report on DNS resolvers allowing zone transfers", action="store_true", default=False) 
+  parser_report.add_argument('-rt', '--report-ntp', help="Report on open NTP servers", action="store_true", default=False)  
+  parser_report.add_argument('-rsh', '--report-snmp-header', help="Report all the SNMP headers", action="store_true", default=False)
   parser_report.add_argument('-ra', '--report-all', help="Report on all ports", action="store_true", default=False)  
   parser_report.add_argument('-rs', '--report-session', help="Report on this session", type=int)
   parser_report.add_argument('-rq', '--report-quick', help="Quick report (hostname + timestamp)", action="store_true", default=False)
@@ -77,6 +81,7 @@ def main():
   parser_scan.add_argument('-sd', '--scan-dns', help="Scan for open DNS resolvers", action="store_true", default=False)
   parser_scan.add_argument('-sz', '--scan-dns-zone', help="Scan for DNS resolvers allowing zone transfers", action="store_true", default=False)
   parser_scan.add_argument('-sn', '--scan-snmp', help="Scan for SNMP servers'", action="store_true", default=False)
+  parser_scan.add_argument('-st', '--scan-ntp', help="Scan for NTP servers'", action="store_true", default=False)  
   parser_scan.add_argument('-sh', '--scan-http', help="Scan for HTTP servers", action="store_true", default=False)  
   parser_scan.add_argument('-t', '--scan-target', help="Target to scan", default=DEFAULT_SCAN_TARGET)    
   parser_scan.add_argument('-o', '--output-file', help="The NMAP export base filename", default=DEFAULT_NMAP)
@@ -176,7 +181,13 @@ def main():
             if ports:
               ports = ports + ","
             ports = ports + "161"
-            print " - snmp-sysdescr"            
+            print " - snmp-sysdescr"
+          if args.scan_ntp == True:
+            scripts = scripts + " --script 'ntp-info' "
+            if ports:
+              ports = ports + ","
+            ports = ports + "123"
+            print " - ntp-info"                  
           if args.scan_http == True:
             scripts = scripts + " --script 'html-title' "
             if ports:
@@ -263,6 +274,18 @@ def main():
               protocol = "tcp"
               script_id = "dns-zone-transfer"
               script_output = "%"
+            elif args.report_ntp == True:
+              service_name = "ntp"
+              portid = 123
+              protocol = "udp"
+              script_id = "ntp-info"
+              script_output = "%"              
+            elif args.report_snmp_header == True:
+              service_name = "snmp"
+              portid = 161
+              protocol = "udp"
+              script_id = "snmp-sysdescr"
+              script_output = "%"
             elif args.report_dns == True:
               service_name = "domain"
               portid = 53
@@ -289,8 +312,8 @@ def main():
  Launch a scan
 '''
 def startScan(output_file, ports, scripts, target):
-  print " nmap -sU -sS -sV -oA ",output_file , " -p ", ports , " " , scripts , " " , target
-  print getstatusoutput("nmap -sU -sS -sV -oA " + output_file + " -p " + ports + " " + scripts + " " + target)
+  print " ", NMAP_LOCATION, " -sU -sS -sV -oA ",output_file , " -p ", ports , " " , scripts , " " , target
+  print getstatusoutput(NMAP_LOCATION + " -sU -sS -sV -oA " + output_file + " -p " + ports + " " + scripts + " " + target)
 
 
   
