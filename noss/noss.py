@@ -20,11 +20,12 @@
 
 import sys
 import os
-import xml.dom.minidom
+#import xml.dom.minidom
 import datetime, time
 import sqlite3
 import argparse
 from commands import getstatusoutput
+from lxml import etree
 
 DATABASE = "noss.db"
 DATABASE_SQL = "noss.sql"
@@ -71,7 +72,8 @@ def main():
   parser_report.add_argument('-rh', '--report-history', help="Include the history in a report", action="store_true", default=False)
   parser_report.add_argument('-rd', '--report-dns', help="Report on open DNS resolvers", action="store_true", default=True)
   parser_report.add_argument('-rz', '--report-dns-zone', help="Report on DNS resolvers allowing zone transfers", action="store_true", default=False) 
-  parser_report.add_argument('-rt', '--report-ntp', help="Report on open NTP servers", action="store_true", default=False)  
+  parser_report.add_argument('-rt', '--report-ntp', help="Report on open NTP servers", action="store_true", default=False)
+  parser_report.add_argument('-rp', '--report-http', help="Report on open HTTP servers", action="store_true", default=False)  
   parser_report.add_argument('-rsh', '--report-snmp-header', help="Report all the SNMP headers", action="store_true", default=False)
   parser_report.add_argument('-ra', '--report-all', help="Report on all ports", action="store_true", default=False)  
   parser_report.add_argument('-rs', '--report-session', help="Report on this session", type=int)
@@ -279,7 +281,13 @@ def main():
               portid = 123
               protocol = "udp"
               script_id = "ntp-info"
-              script_output = "%"              
+              script_output = "%"
+            elif args.report_http == True:
+              service_name = "http"
+              portid = 80
+              protocol = "tcp"
+              script_id = "html-title"
+              script_output = "%"                            
             elif args.report_snmp_header == True:
               service_name = "snmp"
               portid = 161
@@ -300,7 +308,7 @@ def main():
     
       except:
         print "Unable to access the database %s" % db
-        #print "\n",sys.exc_info()
+        print "\n",sys.exc_info()
         sys.exit(1)
 
 
@@ -432,11 +440,10 @@ def insertRecord( session, ip, hostname, hostprotocol, starttime, endtime, porti
  Parse the NMAP XML file into different variables
 '''
 def parseNmapXml( nmapfile ):
-  
   print "\nImport : processing XML file %s" % nmapfile
   
   try:
-    doc = xml.dom.minidom.parse(nmapfile)
+    doc = etree.parse( nmapfile )
     session = maxSession() + 1
   except IOError:
     print "Error: file %s doesn't exist" % (nmapfile)
@@ -447,78 +454,80 @@ def parseNmapXml( nmapfile ):
   except:
     print "Error while processing %s" % (nmapfile)
 
-  for host in doc.getElementsByTagName("host"):
+  for host in doc.getiterator("host"):
     try:
-      address = host.getElementsByTagName("address")[0]
-      ip = address.getAttribute("addr")
-      hostprotocol = address.getAttribute("addrtype")
+      status = host.find("status")
+      
+      if status is not None:
+        state = status.get("state") 
+        
+        if (state == "up"):
+          ports = host.find("ports")
+          
+          if ports is not None:
+            address = host.find("address")
+            hname = host.find("hostnames/hostname")
+
+            ip = address.get("addr")
+            hostprotocol = address.get("addrtype")
+            starttime = host.get("starttime")
+            endtime = host.get("endtime")
+            
+            if hname is not None:
+              hostname = hname.get("name")
+            else:
+              hostname = ip
+
+            for port in ports.getchildren():
+                state_el = port.find("state")   
+
+                if state_el is not None:
+                  state = state_el.get("state")
+
+                  if (state == "open"):
+                    protocol = port.get("protocol")
+                    portid = port.get("portid")
+
+                    service = port.find("service")
+                    script = port.find("script")
+
+                    if service is not None:
+                      service_name = service.get("name")
+                      service_product = service.get("product")
+                      service_version = service.get("version")
+                      service_extra = service.get("extrainfo")
+                    else:
+                      service_name = ""
+                      service_product = ""
+                      service_version = ""
+                      service_extra = ""
+
+                    if script is not None:  
+                      script_id = script.get("id")
+                      script_output = script.get("output")
+                    else:
+                      script_id = ""
+                      script_output = ""
+                    
+                    sys.stdout.write('+')
+                    #print " Insert %s - %s (%s/%s)" % (ip, hostname, protocol, portid)
+                    insertRecord( session, ip, hostname, hostprotocol, starttime, endtime, portid, protocol, state, service_name, service_product, service_version, service_extra, script_id, script_output)
+                  else:
+                    sys.stdout.write('.')   # Port state not open
+                else:
+                  sys.stdout.write('.')   # No port state found
+          else:
+            sys.stdout.write('.') # No ports found
+        else:
+          sys.stdout.write('.') # Host not up
+      else:
+        sys.stdout.write('.') # No host state found
+      sys.stdout.flush()
     except:
-      # move to the next host since the IP is our primary key
-      continue
-
-    try:
-      hname = host.getElementsByTagName("hostname")[0]
-      hostname = hname.getAttribute("name")
-    except:
-      hostname = ""
-
-    try:
-      status = host.getElementsByTagName("status")[0]
-      state = status.getAttribute("state")
-    except:
-      state = ""
-
-    try:
-      starttime = host.getAttribute("starttime")
-      endtime = host.getAttribute("endtime")      
-    except:
-      starttime = ""
-      endtime = ""
-
-    # Only do something if the host is up
-    if (state == "up"):
-      try:
-        ports = host.getElementsByTagName("ports")[0]
-        ports = ports.getElementsByTagName("port")
-      except:
-        # No open ports; continue to the next host
-        continue
-
-      for port in ports:
-        portid = port.getAttribute("portid")
-        protocol = port.getAttribute("protocol")
-        state_el = port.getElementsByTagName("state")[0]
-        state = state_el.getAttribute("state")
-
-        # Only process the output if the port is marked as 'open'
-        if (state == "open"):
-          try:
-            service = port.getElementsByTagName("service")[0]
-            service_name = service.getAttribute("name")
-            service_product = service.getAttribute("product")
-            service_version = service.getAttribute("version")
-            service_extra = service.getAttribute("extrainfo")
-          except:
-            service = ""
-            service_name = ""
-            service_product = ""
-            service_version = ""
-            service_extra = ""
-
-          # Process script and service output
-          for i in (0, 1):
-            try:
-              script = port.getElementsByTagName("script")[i]
-              script_id = script.getAttribute("id")
-              script_output = script.getAttribute("output")
-            except:
-              script_id = ""
-              script_output = ""
-
-            insertRecord( session, ip, hostname, hostprotocol, starttime, endtime, portid, protocol, state, service_name, service_product, service_version, service_extra, script_id, script_output)
+      print "Unable to parse the XML file %s " % nmapfile
   print "Finished processing XML file %s" % nmapfile
-  
 
+  
 
 ''' 
  Empty the whole database but keep the structure intact
@@ -680,9 +689,9 @@ def buildReport( history, report_quick, report_csv, service_name, portid, protoc
 
         if report_quick == True:
           if report_csv == True:
-            print "%s,%s" % (str_starttime, activehost[0])
+            print "%s,%s,%s,%s" % (str_starttime, activehost[0],activehost[7],activehost[8])
           else:
-            print "%s \t%s" % (str_starttime, activehost[0])
+            print "%s \t%s\t(%s/%s)" % (str_starttime, activehost[0],activehost[7],activehost[8])
         else:
           if report_csv == True:
             print "%s,%s,%s,%s,%s,%s,%s,%s" % (str_starttime, activehost[0], activehost[1], activehost[7], activehost[8], activehost[2],service_product, service_version)
