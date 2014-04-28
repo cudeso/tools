@@ -4,10 +4,10 @@
 #
 # Koen Van Impe
 #
-# Uses the file rcc.checks as input ; one entry per line, format <host>:<port>
+# Uses the file ceds.checks as input ; one entry per line, format <host>:<port>
 #
-#  rcc.checks :         www.google.com:443
-#                       imap.mydomain.tld:993
+#  ceds.checks :            www.google.com:443
+#                           imap.mydomain.tld:993
 #                       
 
 
