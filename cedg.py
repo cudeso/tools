@@ -26,8 +26,8 @@ from email.mime.text import MIMEText
 
 keys_to_check = "cedg.checks"
 alert_days = 5
-mail_rcpt = "koen.vanimpe@camelot.cudeso.be"
-mail_from = "koen.vanimpe@camelot.cudeso.be"
+mail_rcpt = "<>"
+mail_from = "<>"
 mail_server = "127.0.0.1"
 key_server = "keyserver.ubuntu.com"
 gpg_location = "/home/gpgtest/.gnupg"
