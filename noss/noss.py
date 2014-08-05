@@ -12,6 +12,7 @@
 #
 #  Koen Van Impe on 2013-12-01
 #       v 0.2       2014-08-01
+#       v 0.3       2014-08-06
 #   koen dot vanimpe at cudeso dot be
 #   license New BSD : http://www.vanimpe.eu/license
 #
@@ -31,11 +32,12 @@ from lxml import etree
 DATABASE = "noss.db"
 DATABASE_SQL = "noss.sql"
 APP_NAME = "NMAP Open Service Scan"
-APP_VERSION = "0.2"
+APP_VERSION = "0.3"
 DEFAULT_NMAP = "noss"
 DEFAULT_NMAP_XML = DEFAULT_NMAP + ".xml"
 DEFAULT_CLEANUPS = 5
 DEFAULT_SCAN_TARGET="127.0.0.1"
+DEFAULT_SCAN_WITHOUT_PING=" -PN "
 #NMAP_LOCATION="/usr/bin/nmap"
 NMAP_LOCATION="/usr/local/nmap/bin/nmap"
 
@@ -90,6 +92,7 @@ def main():
   parser_scan.add_argument('-sh', '--scan-http', help="Scan for HTTP servers", action="store_true", default=False)
   parser_scan.add_argument('-sH', '--scan-http-headers', help="Scan for headers HTTP servers", action="store_true", default=False)
   parser_scan.add_argument('-t', '--scan-target', help="Target to scan", default=DEFAULT_SCAN_TARGET)    
+  parser_scan.add_argument('-ti', '--scan-target-input-file', help="Target to scan (inputfile)", default=False)    
   parser_scan.add_argument('-o', '--output-file', help="The NMAP export base filename", default=DEFAULT_NMAP)
     
   printHeader()
@@ -195,17 +198,17 @@ def main():
             ports = ports + "123"
             print " - ntp-info"                  
           if args.scan_http == True:
-            scripts = scripts + " --script 'html-title' "
+            scripts = scripts + " --script 'http-title' "
             if ports:
               ports = ports + ","            
             ports = ports + "80"  
-            print " - html-title"
+            print " - http-title"
           if args.scan_http_headers == True:
             scripts = scripts + " --script 'http-headers' --script-args http.useragent='" + HTTP_USER_AGENT + "'"
             if ports:
               ports = ports + ","            
             ports = ports + "80"  
-            print " - html-title"            
+            print " - http-headers"            
           if args.scan_dns_zone == True:
             scripts = scripts + " --script 'dns-zone-transfer' "
             if ports:
@@ -213,8 +216,15 @@ def main():
             ports = ports + "53"
             print " - dns-zone-transfer"
 
-          if ports != "":        
-            target = args.scan_target
+          if ports != "": 
+            if args.scan_target_input_file is not None:
+              tmptarget = readTargetfile( args.scan_target_input_file )
+              if tmptarget is not None:
+                target = tmptarget
+              else:
+                target = args.scan_target
+            else:
+              target = args.scan_target
             print " towards : ", target
             startScan(output_file, ports, scripts, target)
             print "\nScan finished and results written to %s.xml (not yet imported). Import the data with 'import'" % output_file
@@ -296,7 +306,7 @@ def main():
               service_name = "http"
               portid = 80
               protocol = "tcp"
-              script_id = "html-title"
+              script_id = "%"
               script_output = "%"                            
             elif args.report_snmp_header == True:
               service_name = "snmp"
@@ -330,8 +340,8 @@ def main():
  Launch a scan
 '''
 def startScan(output_file, ports, scripts, target):
-  print " ", NMAP_LOCATION, " -sU -sS -sV -oA ",output_file , " -p ", ports , " " , scripts , " " , target
-  print getstatusoutput(NMAP_LOCATION + " -sU -sS -sV -oA " + output_file + " -p " + ports + " " + scripts + " " + target)
+  print " ", NMAP_LOCATION, DEFAULT_SCAN_WITHOUT_PING, " -sU -sS -sV -oA ",output_file , " -p ", ports , " " , scripts , " " , target
+  print getstatusoutput(NMAP_LOCATION + DEFAULT_SCAN_WITHOUT_PING + " -sU -sS -sV -oA " + output_file + " -p " + ports + " " + scripts + " " + target)
 
 
   
@@ -399,14 +409,21 @@ def insertRecordHeader( session, ip, hostname, protocol, portid, header, data):
   header = header.strip()
   data = data.strip()
     
-  try:
-    cursor.execute("INSERT INTO httpheader (ip, session, protocol, portid, header, data) VALUES ( ?, ?, ?, ? , ? , ?)", (ip, session, protocol, portid, header, data))
-  except sqlite3.Error, e:
-    print "Error for table httpheader %s:" % e.args[0]
-    sys.exit(1)
-  except:
-    print "\nUnknown exception during insert into table httpheader", ip, portid, protocol, session 
-  conn.commit()
+  if data != "HEAD)" and data != "GET)":
+    try:
+      cursor.execute("SELECT data FROM httpheader WHERE ip = ? AND session = ? AND protocol = ? AND portid = ? AND header = ?", (ip, session, protocol, portid, header))      
+      row = cursor.fetchone()
+      if row is not None:
+        cursor.execute("UPDATE httpheader SET data = ? WHERE ip = ? AND session = ? AND protocol = ? AND portid = ? AND header = ?", (data, ip, session, protocol, portid, header))
+      else:
+        cursor.execute("INSERT INTO httpheader (ip, session, protocol, portid, header, data) VALUES ( ?, ?, ?, ? , ? , ?)", (ip, session, protocol, portid, header, data))
+    except sqlite3.Error, e:
+      print "Error for table httpheader %s:" % e.args[0]
+      print session, ip, hostname, protocol, portid, header, data
+      sys.exit(1)
+    except:
+      print "\nUnknown exception during insert into table httpheader", ip, portid, protocol, session 
+    conn.commit()
 
 
 
@@ -545,7 +562,7 @@ def parseNmapXml( nmapfile ):
                     if (script_id == "http-headers"):
                       for line in script_output.splitlines():
                         if not line:continue
-                        header = line.split(":")
+                        header = line.split(":", 1)
                         if len(header) == 2:
                           insertRecordHeader( session, ip, hostname, protocol, portid, header[0], header[1])
                   else:
@@ -764,6 +781,19 @@ def buildReport( history, report_quick, report_csv, service_name, portid, protoc
     sys.exit(1)
 
 
+
+'''
+ Read the target file list
+'''
+def readTargetfile( targetlist ):
+  try:
+    file = open( targetlist, 'r')
+    lines = file.readlines()
+  except:
+    print "Unable to read %s " % targetlist
+    sys.exit(1)
+
+  return "-iL " + targetlist
 
 '''
  Print the no database error
