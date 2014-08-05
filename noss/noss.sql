@@ -69,3 +69,42 @@ BEGIN
     END;
 END;
 
+-- ------------------------------------------
+-- Dump of "httpheader"
+-- ------------------------------------------
+
+DROP TABLE IF EXISTS "httpheader";
+
+CREATE TABLE "httpheader"(
+    "session" Integer NOT NULL,
+    "ip" Text NOT NULL,
+    "portid" Integer NOT NULL,
+    "protocol" Text NOT NULL,    
+    "header" Text,
+    "data" Text,
+    CONSTRAINT "link_hosts_httpheader_0" FOREIGN KEY ( "ip","session" ) REFERENCES "hosts"( "ip","session" )
+        ON DELETE Cascade
+,
+PRIMARY KEY ( "ip","portid","protocol","session", "header" ) );
+
+CREATE TRIGGER "fki_httpheader_hosts_ip"
+    BEFORE INSERT
+    ON "httpheader"
+    FOR EACH ROW
+BEGIN
+    SELECT CASE
+        WHEN ((SELECT ip FROM hosts WHERE ip = NEW.ip ) IS NULL)
+        THEN RAISE(ABORT, 'insert on table "httpheader" violates foreign key constraint "fk_httpheader_hosts"')
+    END;
+END;
+
+CREATE TRIGGER "fku_httpheader_hosts_ip"
+    BEFORE UPDATE
+    ON "httpheader"
+    FOR EACH ROW
+BEGIN
+    SELECT CASE
+        WHEN ((SELECT ip FROM hosts WHERE ip = NEW.ip AND session = NEW.session) IS NULL)
+        THEN RAISE(ABORT, 'update on table "httpheader" violates foreign key constraint "fk_httpheader_hosts"')
+    END;
+END;

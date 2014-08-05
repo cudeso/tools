@@ -11,6 +11,7 @@
 # for any service that's detectably by an NMAP script
 #
 #  Koen Van Impe on 2013-12-01
+#       v 0.2       2014-08-01
 #   koen dot vanimpe at cudeso dot be
 #   license New BSD : http://www.vanimpe.eu/license
 #
@@ -30,13 +31,15 @@ from lxml import etree
 DATABASE = "noss.db"
 DATABASE_SQL = "noss.sql"
 APP_NAME = "NMAP Open Service Scan"
-APP_VERSION = "0.1"
+APP_VERSION = "0.2"
 DEFAULT_NMAP = "noss"
 DEFAULT_NMAP_XML = DEFAULT_NMAP + ".xml"
 DEFAULT_CLEANUPS = 5
 DEFAULT_SCAN_TARGET="127.0.0.1"
 #NMAP_LOCATION="/usr/bin/nmap"
 NMAP_LOCATION="/usr/local/nmap/bin/nmap"
+
+HTTP_USER_AGENT="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)"
 
 '''
  Main function, parse the app arguments
@@ -84,7 +87,8 @@ def main():
   parser_scan.add_argument('-sz', '--scan-dns-zone', help="Scan for DNS resolvers allowing zone transfers", action="store_true", default=False)
   parser_scan.add_argument('-sn', '--scan-snmp', help="Scan for SNMP servers'", action="store_true", default=False)
   parser_scan.add_argument('-st', '--scan-ntp', help="Scan for NTP servers'", action="store_true", default=False)  
-  parser_scan.add_argument('-sh', '--scan-http', help="Scan for HTTP servers", action="store_true", default=False)  
+  parser_scan.add_argument('-sh', '--scan-http', help="Scan for HTTP servers", action="store_true", default=False)
+  parser_scan.add_argument('-sH', '--scan-http-headers', help="Scan for headers HTTP servers", action="store_true", default=False)
   parser_scan.add_argument('-t', '--scan-target', help="Target to scan", default=DEFAULT_SCAN_TARGET)    
   parser_scan.add_argument('-o', '--output-file', help="The NMAP export base filename", default=DEFAULT_NMAP)
     
@@ -196,6 +200,12 @@ def main():
               ports = ports + ","            
             ports = ports + "80"  
             print " - html-title"
+          if args.scan_http_headers == True:
+            scripts = scripts + " --script 'http-headers' --script-args http.useragent='" + HTTP_USER_AGENT + "'"
+            if ports:
+              ports = ports + ","            
+            ports = ports + "80"  
+            print " - html-title"            
           if args.scan_dns_zone == True:
             scripts = scripts + " --script 'dns-zone-transfer' "
             if ports:
@@ -382,6 +392,25 @@ def printStats( stat_type = "all" ):
 
 
 '''
+ Insert a record found in the read file for httpheader
+'''
+def insertRecordHeader( session, ip, hostname, protocol, portid, header, data):
+
+  header = header.strip()
+  data = data.strip()
+    
+  try:
+    cursor.execute("INSERT INTO httpheader (ip, session, protocol, portid, header, data) VALUES ( ?, ?, ?, ? , ? , ?)", (ip, session, protocol, portid, header, data))
+  except sqlite3.Error, e:
+    print "Error for table httpheader %s:" % e.args[0]
+    sys.exit(1)
+  except:
+    print "\nUnknown exception during insert into table httpheader", ip, portid, protocol, session 
+  conn.commit()
+
+
+
+'''
  Insert a record found in the read file
 '''
 def insertRecord( session, ip, hostname, hostprotocol, starttime, endtime, portid, protocol, state, service_name, service_product, service_version, service_extra, script_id, script_output):
@@ -512,6 +541,13 @@ def parseNmapXml( nmapfile ):
                     sys.stdout.write('+')
                     #print " Insert %s - %s (%s/%s)" % (ip, hostname, protocol, portid)
                     insertRecord( session, ip, hostname, hostprotocol, starttime, endtime, portid, protocol, state, service_name, service_product, service_version, service_extra, script_id, script_output)
+
+                    if (script_id == "http-headers"):
+                      for line in script_output.splitlines():
+                        if not line:continue
+                        header = line.split(":")
+                        if len(header) == 2:
+                          insertRecordHeader( session, ip, hostname, protocol, portid, header[0], header[1])
                   else:
                     sys.stdout.write('.')   # Port state not open
                 else:
@@ -523,6 +559,8 @@ def parseNmapXml( nmapfile ):
       else:
         sys.stdout.write('.') # No host state found
       sys.stdout.flush()
+    except Exception as e:
+        print e
     except:
       print "Unable to parse the XML file %s " % nmapfile
   print "Finished processing XML file %s" % nmapfile
