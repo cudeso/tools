@@ -42,6 +42,7 @@ DEFAULT_SCAN_WITHOUT_PING=" -PN "
 NMAP_LOCATION="/usr/local/nmap/bin/nmap"
 
 HTTP_USER_AGENT="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/6.0)"
+HTTP_USER_AGENT_MOBILE="Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10A5376e"
 
 '''
  Main function, parse the app arguments
@@ -91,6 +92,7 @@ def main():
   parser_scan.add_argument('-st', '--scan-ntp', help="Scan for NTP servers'", action="store_true", default=False)  
   parser_scan.add_argument('-sh', '--scan-http', help="Scan for HTTP servers", action="store_true", default=False)
   parser_scan.add_argument('-sH', '--scan-http-headers', help="Scan for headers HTTP servers", action="store_true", default=False)
+  parser_scan.add_argument('-mua', '--scan-mobile-user-agent', help="Use mobile browser user agent for http scan", action="store_true", default=False)
   parser_scan.add_argument('-t', '--scan-target', help="Target to scan", default=DEFAULT_SCAN_TARGET)    
   parser_scan.add_argument('-ti', '--scan-target-input-file', help="Target to scan (inputfile)", default=False)    
   parser_scan.add_argument('-o', '--output-file', help="The NMAP export base filename", default=DEFAULT_NMAP)
@@ -204,6 +206,10 @@ def main():
             ports = ports + "80"  
             print " - http-title"
           if args.scan_http_headers == True:
+            if args.scan_mobile_user_agent == True:
+              http_useragent = HTTP_USER_AGENT_MOBILE
+            else:
+              http_useragent = HTTP_USER_AGENT            
             scripts = scripts + " --script 'http-headers' --script-args http.useragent='" + HTTP_USER_AGENT + "'"
             if ports:
               ports = ports + ","            
