@@ -8,13 +8,13 @@
 #   Koen Van Impe   20141108
 #
 
-BACKUP_HOST="hostname>"
+BACKUP_HOST="<hostname>"
 BACKUP_USER="<username>"
 BACKUP_KEY="<privatekey>"
 BACKUP_PATH="<pathtobackupto>"
 GPG_RECIPIENT="<gpgRCPT>"
 GPG_OUTPUT="backup.tar.gz.gpg"
-
+# add $(date +%Y-%m-%d) to GPG_OUTPUT for unique backups
 declare -a FILES=( '/home/user/.gnupg/'
                    '/home/user/.ssh/' )
 
