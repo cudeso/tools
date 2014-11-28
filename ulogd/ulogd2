@@ -92,9 +92,10 @@ do_iptables() {
                 do
                 	if [ ! -z $IP ]; then
                                 echo "Exclude traffic for $IP"
-                                iptables -I $IPTABLES_CHAIN -j NFLOG --nflog-group 1 --nflog-threshold 20 ! -s $IP
+                                iptables -I $IPTABLES_CHAIN -j RETURN -s $IP
                         fi
                 done < $ULOGD_EXCLUDE
+		iptables -A $IPTABLES_CHAIN -j NFLOG --nflog-group 1 --nflog-threshold 20 
         fi
 }
 case "$1" in
