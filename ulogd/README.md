@@ -2,23 +2,24 @@
 
 Adjusted init script for ulogd2.
 
-Ulogd init script with option to exclude a list of IPs being logged
- http://www.netfilter.org/projects/ulogd/
+Ulogd init script with a list of IPs excluded from being logged.
+ 
+Ulogd is available at http://www.netfilter.org/projects/ulogd/
 
 # Prerequisites
 
 ## Jump to the correct chain
 
-Make sure that the first rule in the INPUT chain redirects the traffic to the new chain defined in **IPTABLES_CHAIN**.
+Make sure that the first rule in the INPUT chain redirects the traffic to the new chain defined in the variable **IPTABLES_CHAIN**.
 The default chain is **ULOGD_exclude**.
 
-'''
+```
 iptables -I INPUT -j ULOGD_exclude
-'''
+```
 
 ## List of IPs
 
-The list of IPs that need to be excluded is saved in **ULOGD_EXCLUDE**.
+The list of IPs that need to be excluded from logging is saved in the variable **ULOGD_EXCLUDE**.
 The default file is **/etc/ulogd.excludeip** and needs to have a network / ip per line.
 
 '''
