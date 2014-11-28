@@ -95,7 +95,7 @@ do_iptables() {
                                 iptables -I $IPTABLES_CHAIN -j RETURN -s $IP
                         fi
                 done < $ULOGD_EXCLUDE
-		iptables -A $IPTABLES_CHAIN -j NFLOG --nflog-group 1 --nflog-threshold 20 
+		iptables -A $IPTABLES_CHAIN -j NFLOG --nflog-group 1 --nflog-threshold 20  -m limit --limit 1/s
         fi
 }
 case "$1" in
