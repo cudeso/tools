@@ -20,16 +20,20 @@ iptables -I INPUT -j ULOGD_exclude
 ## List of IPs
 
 The list of IPs that need to be excluded from logging is saved in the variable **ULOGD_EXCLUDE**.
-The default file is **/etc/ulogd.excludeip** and needs to have a network / ip per line.
+The default file is **/etc/ulogd.excludeip** and needs to have a network / ip per line. Empty lines are ignored.
 
-'''
-'''
+```
+10.0.0.0/16
+10.5.0.0/16
+
+10.12.0.0/16
+```
 
 # Changes compared to the original script
 
 There's an extra function **do_iptables** that parces the file with IPs and creates iptables rules. The function is called from the start, restart and reload function.
 
-'''
+```
  #
  # Function to setup an iptables chain with exclusion IPs 
  #
@@ -48,4 +52,4 @@ do_iptables() {
                 done < $ULOGD_EXCLUDE
         fi
 }
-'''
+```
