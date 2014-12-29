@@ -33,6 +33,15 @@ host = ''
 # Leave host to '' to bind to any host
 
 
+
+'''
+    Print connection
+'''
+def print_connection(timestamp, remote_ip, remote_port, protocol, port):
+    print " New connection %s %s %s -> %s/%s" % (timestamp, remote_ip, remote_port, protocol, port)
+
+
+
 '''
     Log a message
 '''
@@ -42,7 +51,10 @@ def log_message(file, message, address, ip, port, protocol):
     remote_ip = str(address[0])
     remote_port = str(address[1])
     logline = "%s %s %s -> %s %s/%s : %s\n" % ( timestamp, remote_ip, remote_port, ip, protocol, port, message)
-    file.write(logline)                    
+    file.write(logline)
+    print_connection(timestamp, remote_ip, remote_port, protocol, port)
+
+
 
 '''
     Build the TCP server
