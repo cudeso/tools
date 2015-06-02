@@ -19,6 +19,9 @@ base_url = "https://weakdh.org/check/?server="
 f = open( weakdh_hosts , 'r')
 count = 0
 vulnerable = 0
+with_tls = 0
+no_result = 0
+verbose = False
 for host in f:
     count = count + 1
     host = host.strip()
@@ -32,16 +35,29 @@ for host in f:
     if has_tls:
         error = json_data["results"][0]["error"]
         if not error:
+            with_tls = with_tls + 1
             try:
                 prime_length = json_data["results"][0]["dh_params"]["prime_length"]
                 export_dh_params = json_data["results"][0]["export_dh_params"]["prime_length"]
                 if prime_length < 1024:
-                    print ip, host
+                    print ip, host, "Vulnerable"
                     vulnerable = vulnerable + 1
                 elif export_dh_params < 1024:
-                    print ip, host
+                    print ip, host, "Vulnerable"
                     vulnerable = vulnerable + 1
+                else:
+                    if verbose:
+                        print ip, host, " has TLS, not vulnerable"
             except:
                 continue
+        else:
+            no_result = no_result + 1
+            if verbose:
+                print ip, host, " no result from weakDH"
+    else:
+        if verbose:
+            print ip, host, "no TLS"
     time.sleep( pause_interval )
-print "%s hosts tested, %s vulnerable" % (count, vulnerable)
+print "%s hosts tested, %s with no results, %s sites with TLS, %s vulnerable" % (count, no_result, with_tls, vulnerable)
+
+
