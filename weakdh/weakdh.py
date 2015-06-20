@@ -23,40 +23,50 @@ with_tls = 0
 no_result = 0
 verbose = False
 for host in f:
-    count = count + 1
-    host = host.strip()
-    response = urllib2.urlopen( base_url + host )
-    json_data = json.load(response) 
+    try:
+        count = count + 1
+        host = host.strip()
+        response = urllib2.urlopen( base_url + host )
+        json_data = json.load(response) 
 
-    host = json_data["domain"]
-    ip = json_data["ip_addresses"][0]
-    has_tls = json_data["results"][0]["has_tls"]
+        host = json_data["domain"]
+        ip = json_data["ip_addresses"][0]
+        has_tls = json_data["results"][0]["has_tls"]
 
-    if has_tls:
-        error = json_data["results"][0]["error"]
-        if not error:
-            with_tls = with_tls + 1
-            try:
-                prime_length = json_data["results"][0]["dh_params"]["prime_length"]
-                export_dh_params = json_data["results"][0]["export_dh_params"]["prime_length"]
-                if prime_length < 1024:
-                    print ip, host, "Vulnerable"
-                    vulnerable = vulnerable + 1
-                elif export_dh_params < 1024:
-                    print ip, host, "Vulnerable"
-                    vulnerable = vulnerable + 1
-                else:
-                    if verbose:
-                        print ip, host, " has TLS, not vulnerable"
-            except:
-                continue
+        if has_tls:
+            error = json_data["results"][0]["error"]
+            if not error:
+                with_tls = with_tls + 1
+                try:
+                    prime_length = json_data["results"][0]["dh_params"]["prime_length"]
+                    export_supported = json_data["results"][0]["export_dh_params"]
+                    if export_supported:
+                        export_dh_params = json_data["results"][0]["export_dh_params"]["prime_length"]
+                        if prime_length < 1024:
+                            print ip, host, "Vulnerable"
+                            vulnerable = vulnerable + 1
+                        elif export_dh_params < 1024:
+                            print ip, host, "Vulnerable"
+                            vulnerable = vulnerable + 1
+                        else:
+                            if verbose:
+                                print ip, host, " has TLS, not vulnerable"
+                    else:
+                        if verbose:
+                            print ip, host, " does not support export_dh_params"
+                except:
+                    continue
+            else:
+                no_result = no_result + 1
+                if verbose:
+                    print ip, host, " no result from weakDH"
         else:
-            no_result = no_result + 1
             if verbose:
-                print ip, host, " no result from weakDH"
-    else:
+                print ip, host, "no TLS"        
+    except:
         if verbose:
-            print ip, host, "no TLS"
+            print "Invalid hostname %s" % host
+
     time.sleep( pause_interval )
 print "%s hosts tested, %s with no results, %s sites with TLS, %s vulnerable" % (count, no_result, with_tls, vulnerable)
 
