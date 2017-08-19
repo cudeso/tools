@@ -9,6 +9,7 @@
 
 ## Usage
 
-First create the sqlite database
+First create the sqlite database sqlite3 shodan-asset-monitor.db < shodan-asset-monitor.sql
 
 Give one parameter as the string to search for in Shodan
+Second (optional) parameter will disable mail notifications (ideal for first run)
