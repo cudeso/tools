@@ -14,6 +14,7 @@ CREATE TABLE "host_items"(
 	"modified" Text,
 	"asn" Text,
 	"org" Text,
+	"hostname" Text,
 	"country_code" Text );
 
 CREATE INDEX "index_create1" ON "host_items"( "created" );
