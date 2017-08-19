@@ -53,6 +53,7 @@ def notify_host(query, ip_str, action, extra_body_text):
 
         msg = MIMEMultipart()
         host_mailinfo = "Timestamp: %s \n IP: %s \n Hostname: %s \n ASN: %s \n Org: %s \n Country: %s" % (rec[3], ip_str, rec[6], rec[7], rec[8], rec[9])
+        query = unicode(query, 'utf-8')
         if action == "new":
             msg["Subject"] = "%s - %s - New Host : %s" % (MAIL_SUBJECT, query, ip_str)
             body = "New host found by Shodan monitor: \n " + host_mailinfo
