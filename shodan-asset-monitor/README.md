@@ -1,5 +1,10 @@
 # Monitor your assets in Shodan
 
+## Upgrade to v2
+
+If you have an existing sqlite db (from v1) and you want to upgrade the database then do
+`sqlite shodan-asset-monitor.db < shodan-asset-monitor_updatedb.sql`
+
 ## Change this
 
 * Shodan API key
