@@ -6,10 +6,15 @@
 
 CREATE TABLE "host_items"(
 	"ip_str" Text NOT NULL,
+	"domain" Text,
 	"port" Text,
 	"transport" Text,
 	"product" Text,
 	"devicetype" Text,
+	"vendorid" Text,
+	"data" Text,
+	"searchquery" Text,
+	"shodanmodule" Text,
 	"created" Text,
 	"modified" Text,
 	"asn" Text,
