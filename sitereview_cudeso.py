@@ -21,6 +21,8 @@ import sys
 
 import urllib2
 import time
+from socket import timeout
+import socket
 
 class SiteReview(object):
     def __init__(self):
@@ -50,24 +52,44 @@ class SiteReview(object):
             self.date = response["translatedRateDates"][0]["text"][0:35]
             self.url = response["url"]
 
-def main(url):
-    try:
-        response = urllib2.urlopen("http://" + url, timeout=1)
-        status_code = response.getcode()
-        site_live = True
-        s = SiteReview()
-        response = s.sitereview(url)
-        s.check_response(response)
-        date = s.date
-        category = s.category
-        
-    except urllib2.URLError as err: 
-        status_code = 0
-        date = ""
-        category = ""
-        site_live = False
 
-    print("%s,%s,%s,%s,%s" % (url, site_live, status_code, date, category))
+def printcsv(url, ip, site_live, status_code, date, category):
+    print("%s,%s,%s,%s,%s,%s" % (url, ip, site_live, status_code, date, category))    
+
+
+def main(url):
+    category = ""
+    date = ""
+    site_live = False
+    status_code = 0
+    ip = ""
+
+    try:
+        ip = socket.gethostbyname(url)
+        try:
+            response = urllib2.urlopen("http://" + url, timeout=5)
+            status_code = response.getcode()
+            s = SiteReview()
+            
+            response = s.sitereview(url)
+            s.check_response(response)
+            date = s.date
+            category = s.category
+            site_live = True
+        except urllib2.URLError as err:
+            category = err.reason
+        except urllib2.HTTPError as err:
+            if err.code == 302:
+                category = "HTTP-302"
+        except:
+            category = "Unknown error"
+        printcsv(url, ip, site_live, status_code, date, category)
+
+    except socket.gaierror:
+        printcsv(url, ip, site_live, status_code, date, "No DNS")
+        
+    if not url.startswith("www"):
+        main("www."+url)
 
 if __name__ == "__main__":
     file = open("sitelist.lst", "r")
@@ -78,5 +100,5 @@ if __name__ == "__main__":
         if site.startswith("https://"):
             site = site[8:]
         main(site)
-        time.sleep(1.5)
+        time.sleep(5)
     file.close()
