@@ -6,7 +6,7 @@ Koen Van Impe
 
 Create block list from MISP data
 Put this script in crontab to run every /15 or /60
-    */5 *    * * *   mispuser   /usr/bin/python3 /home/mispuser/PyMISP/examples/blocklist_generator.py
+    */30 *    * * *   root   /var/www/MISP/venv/bin/python3 /var/www/MISP/PyMISP/examples/blocklist_generator.py
 
 
 '''
@@ -28,13 +28,47 @@ logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
 misp = ExpandedPyMISP(misp_url, misp_key, misp_verifycert, debug=False, tool='blocklist_generator')
 exclude_warninglist = "corp_exclusion"
 path_to_warninglist = "/var/www/MISP/app/files/warninglists/lists/{}/list.json".format(exclude_warninglist)
-output_full_csv = "covid19_domains.csv"
-output_domainonly_csv = "covid19_domains_domainonly.csv"
-misp_filter_tag = "pandemic:covid-19=\"cyber\""
 
 
 def get_valid_domains():
-    return ['belgium.be', 'google.com', 'www.info-coronavirus.be', 'info-coronavirus.be', '2020coronavirus.org']
+    return ['belgium.be', 'google.com', 'www.info-coronavirus.be', 'info-coronavirus.be']
+
+
+def fetch_misp_results(misp_tags):
+    relative_path = 'attributes/restSearch'
+    body = {
+        "returnFormat": "json",
+        "enforceWarninglist": "True",
+        "tags": misp_tags,
+        "type": ["url", "domain", "hostname"],
+        "includeDecayScore": "True",
+        "includeEventTags": "True"
+        }
+    result = misp.direct_call(relative_path, body)
+
+    result_csv = result_tlpwhite_csv = result_falsepositive_low = result_domain_csv =  result_domain_tlpwhite_csv = result_domain_falsepositive_csv = "value,decay_sore,value_type,event_id,event_info"
+    if "Attribute" in result:
+
+        for attribute in result["Attribute"]:
+            value = attribute["value"]
+            value_type = attribute["type"]
+            decay_score = 0
+            if "decay_score" in attribute:
+                decay_score = attribute["decay_score"][0]["score"]
+            event_info = attribute["Event"]["info"]
+            event_id = attribute["Event"]["id"]
+            result_csv = result_csv + "\n{},{},{},{},\"{}\"".format(value, decay_score, value_type, event_id, event_info)
+            result_domain_csv = result_domain_csv + "\n{}".format(value)
+
+            for t in attribute["Tag"]:
+                if t["name"] == "tlp:white":
+                    result_tlpwhite_csv = result_tlpwhite_csv + "\n{},{},{},{},\"{}\"".format(value, decay_score, value_type, event_id, event_info)
+                    result_domain_tlpwhite_csv = result_domain_tlpwhite_csv + "\n{}".format(value)
+                if t["name"] == "false-positive:risk=\"low\"":
+                    result_falsepositive_low = result_falsepositive_low + "\n{},{},{},{},\"{}\"".format(value, decay_score, value_type, event_id, event_info)
+                    result_domain_falsepositive_csv = result_domain_falsepositive_csv + "\n{}".format(value)
+
+    return result_csv, result_tlpwhite_csv, result_falsepositive_low, result_domain_csv, result_domain_tlpwhite_csv, result_domain_falsepositive_csv
 
 # Step 0: Print all enabled warninglists
 active_warninglists = misp.warninglists()
@@ -49,7 +83,7 @@ valid_domains = get_valid_domains()
 domains_for_exclusion = []
 for domain in valid_domains:
     # Check if the domain is already in a warninglist
-    lookup_warninglist = misp.values_in_warninglist(domain)
+    lookup_warninglist = misp.values_in_warninglist([domain])
     if lookup_warninglist:
         # It's already in the list, ignore
         res = lookup_warninglist[domain][0]
@@ -85,30 +119,19 @@ update_result = misp.update_warninglists()
 logging.info(json.dumps(update_result))
 
 # Step 5: Fetch all the domains that we want on the blocklist
-relative_path = 'attributes/restSearch'
-body = {
-    "returnFormat": "csv",
-    "enforceWarninglist": "true",
-    "tags": misp_filter_tag,
-    "limit": "5",
-    "type": ["url", "domain", "hostname"]
-    }
-result_full = misp.direct_call(relative_path, body)
-result_domainonly = ""
-step1 = True
-for el in result_full.split('\n'):
-    if step1 is True:
-        step1 = False
-        continue
-    if el:
-        domain = el.split(",")[4].replace('"', '')
-        result_domainonly = result_domainonly + "\n{}".format(domain)
+result_full, result_tlpwhite, result_fp, result_domain, result_domain_tlpwhite, result_domain_fp = fetch_misp_results("pandemic:covid-19=\"cyber\"")
 
 # Step 6: Write the blocklist
-logging.info("Write {}".format(output_full_csv))
-f = open(output_full_csv, "w")
+logging.info("Write CSV files")
+f = open("/home/misp/blocklist_upload/blocklist_full.csv", "w")
 f.write(result_full)
-
-logging.info("Write {}".format(output_domainonly_csv))
-f = open(output_domainonly_csv, "w")
-f.write(result_domainonly)
+f = open("/home/misp/blocklist_upload/blocklist_tlpwhite.csv", "w")
+f.write(result_tlpwhite)
+f = open("/home/misp/blocklist_upload/blocklist_fp_lowrisk.csv", "w")
+f.write(result_fp)
+f = open("/home/misp/blocklist_upload/blocklist_domain.csv", "w")
+f.write(result_domain)
+f = open("/home/misp/blocklist_upload/blocklist_domain_fp_lowrisk.csv", "w")
+f.write(result_domain_fp)
+f = open("/home/misp/blocklist_upload/blocklist_domain_tlpwhite.csv", "w")
+f.write(result_domain_tlpwhite)
