@@ -10,6 +10,7 @@ import smtplib
 
 key = ''
 url = ''
+eventurl = ''
 timeframe='1d'
 ignore_eventid = []
 output_domain_file = '/tmp/possibledomains.txt'
@@ -24,6 +25,18 @@ def checkDomain(domain):
         return False
     except:
         return False
+
+
+def getmisp_eventdetails(key, url, eventid):
+    headers = {'Authorization': '{}'.format(key), 'Content-type': 'application/json', 'Accept': 'application/json'}
+    payload = '{ "returnFormat": "json", "eventid": "%s", "enforceWarninglist": true, "metadata": true }' % eventid 
+    response = requests.post(url, headers=headers, data=payload, verify=False)
+    json_response = json.loads(response.text)
+    try:
+        eventdetails = json_response['response'][0]['Event']['info']
+        return eventdetails
+    except:
+        return False 
 
 
 def getmisp_domains(key, url, timeframe):
@@ -41,8 +54,10 @@ def getmisp_domains(key, url, timeframe):
                 fp.decode(url)
                 domain = fp.get_domain()
                 category = attr['category']
+                comment = attr['comment']
+                eventinfo = getmisp_eventdetails(key, eventurl, eventid)
                 timestamp = datetime.datetime.utcfromtimestamp(int(attr['timestamp'])).strftime('%Y-%m-%d')
-                response_domains.append({'domain': domain, 'eventid': eventid, 'category': category, 'timestamp': timestamp})
+                response_domains.append({'domain': domain, 'eventid': eventid, 'category': category, 'timestamp': timestamp, 'comment': comment, 'event': eventinfo})
         return response_domains
     except:
         return response_domains
@@ -61,11 +76,13 @@ def getmisp_urls(key, url, timeframe):
             eventid = attr['event_id']
             if eventid not in ignore_eventid:
                 category = attr['category']
+                comment = attr['comment']
+                eventinfo = getmisp_eventdetails(key, eventurl, eventid)
                 timestamp = datetime.datetime.utcfromtimestamp(int(attr['timestamp'])).strftime('%Y-%m-%d')
                 fp.decode(url)
                 domain = fp.get_domain()
-                if re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", domain):
-                    response_domains.append({'domain': domain, 'eventid': eventid, 'category': category, 'timestamp': timestamp})
+                if not re.match(r"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}", domain):
+                    response_domains.append({'domain': domain, 'eventid': eventid, 'category': category, 'timestamp': timestamp, 'comment': comment, 'event': eventinfo})
 
         return response_domains
     except:
@@ -89,19 +106,20 @@ def checkRegister(domains):
                 try:
                     whois_result = whois.query(domain['domain'])
                     if whois_result.creation_date is None:
-                        check_to_register.append({'domain': domain['domain'], 'eventid': domain['eventid'], 'reason': 'No DNS. No Whois', 'category': domain['category'], 'timestamp': domain['timestamp']})
+                        check_to_register.append({'domain': domain['domain'], 'eventid': domain['eventid'], 'reason': 'No DNS. No Whois', 'category': domain['category'], 'timestamp': domain['timestamp'], 'comment': domain['comment'], 'event': domain['event']})
                 except ValueError:
                     continue
                 except Exception as e:
                     reason = str(e).split('\n')[0]
-                    check_to_register.append({'domain': domain['domain'], 'eventid': domain['eventid'], 'reason': reason,  'category': domain['category'], 'timestamp': domain['timestamp']})
-
+                    check_to_register.append({'domain': domain['domain'], 'eventid': domain['eventid'], 'reason': reason,  'category': domain['category'], 'timestamp': domain['timestamp'], 'comment': domain['comment'], 'event': domain['event']})
+                    continue
+            
     return check_to_register
 
 
 # Read all domains
-#print(getmisp_urls(key, url, timeframe))
-#print(getmisp_domains(key, url, timeframe))
+res_urls = []
+res_domains = []
 res_urls = checkRegister(getmisp_urls(key, url, timeframe))
 res_domains = checkRegister(getmisp_domains(key, url, timeframe))
 
