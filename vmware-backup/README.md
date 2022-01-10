@@ -18,6 +18,7 @@
 * This assumes all the VM files (extra disks) are in the folder of the VM
 * Avoid using spaces in the VM name
 * Try the script first manually before putting it in crontab
+* Assumes your "main" datastore is named datastore1
 * Tested on **ESXi 7.0.2**
 
 ## Script workflow
