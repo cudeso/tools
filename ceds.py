@@ -51,6 +51,8 @@ context_no_verify.check_hostname = False
 context_no_verify.verify_mode = ssl.CERT_NONE
 
 for line in servers:
+    if not line.strip():
+        continue
     host, port = line.strip().rsplit(":", 1)
     try:
         exp_date = None
