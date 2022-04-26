@@ -16,6 +16,23 @@ import datetime
 import ssl
 import smtplib
 from email.message import EmailMessage
+try:
+    from cryptography.x509 import load_der_x509_certificate
+
+    def fallbackGetExpire(host, port):
+        try:
+            with socket.create_connection((host, port)) as s:
+                with context_no_verify.wrap_socket(s) as sock:
+                    sock.do_handshake()
+                    cert = sock.getpeercert(True)
+                    sock.close()
+            return load_der_x509_certificate(cert).not_valid_after
+        except Exception as e:
+            print("Error while falling back", e)
+            return None
+except ImportError:
+    def fallbackGetExpire(host, port):
+        return None
 
 servers_to_check = "ceds.checks"
 alert_days = 5
@@ -31,30 +48,26 @@ cert_tested = 0
 context = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
 context_no_verify = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
 context_no_verify.check_hostname = False
-context_no_verify.verify_mode = ssl.CERT_OPTIONAL
+context_no_verify.verify_mode = ssl.CERT_NONE
 
 for line in servers:
+    if not line.strip():
+        continue
     host, port = line.strip().rsplit(":", 1)
     try:
+        exp_date = None
         try:
             with socket.create_connection((host, port)) as s:
                 with context.wrap_socket(s, server_hostname=host) as sock:
                     sock.do_handshake()
                     cert = sock.getpeercert()
                     sock.close()
+
+            exp_date = datetime.datetime.fromtimestamp(
+                ssl.cert_time_to_seconds(cert['notAfter'])
+            )
         except ssl.SSLCertVerificationError:
-            try:
-                with socket.create_connection((host, port)) as s:
-                    with context_no_verify.wrap_socket(s) as sock:
-                        sock.do_handshake()
-                        cert = sock.getpeercert()
-                        sock.close()
-            except Exception as exc:
-                response = response + "\n Unable to connect to %s : %s " % (
-                    host, port
-                )
-                print(exc)
-                continue
+            exp_date = fallbackGetExpire(host, port)
             response = response + "\n %s : %s hostname mismatch" % (
                 host, port
             )
@@ -63,12 +76,10 @@ for line in servers:
                 host, port
             )
             print(exc)
-            continue
-        exp_date = datetime.datetime.fromtimestamp(
-            ssl.cert_time_to_seconds(cert['notAfter'])
-        )
-        days_to_expire = int((exp_date - cur_date).days)
         cert_tested = cert_tested + 1
+        if not exp_date:
+            continue
+        days_to_expire = int((exp_date - cur_date).days)
 
         if days_to_expire < 0:
             response = response + "\n %s : %s EXPIRED" % (host, port)
