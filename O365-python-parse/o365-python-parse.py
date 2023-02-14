@@ -75,20 +75,41 @@ with open('auditrecords.csv') as csv_file:
     tt.print(o365_data, header=o365_header)
 
     # Print Client IPs
-    tt_data = []
+    tt_data_1 = []
     tt_header = ["Client IP", "Count"]
     o365_client_ip = sorted(o365_client_ip.items(), key=lambda x: x[1], reverse=True)
     for el in o365_client_ip:
-        tt_data.append([el[0], el[1]])
-    tt.print(tt_data, header=tt_header)
+        tt_data_1.append([el[0], el[1]])
+    tt.print(tt_data_1, header=tt_header)
 
     # Print Operations
-    tt_data = []
+    tt_data_2 = []
     tt_header = ["Operation", "Count"]
     o365_unique_operations = sorted(o365_unique_operations.items(), key=lambda x: x[1], reverse=True)
     for el in o365_unique_operations:
-        tt_data.append([el[0], el[1]])
-    tt.print(tt_data, header=tt_header)
+        tt_data_2.append([el[0], el[1]])
+    tt.print(tt_data_2, header=tt_header)
 
     print(f'Processed {line_count} lines. {failed_line_count} lines failed processing. \nLog data from {start_log} until {creationtime}')
     
+    with open("o365-parse-details.csv", "w", newline='') as csvfile:
+        fieldnames=o365_header
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for el in o365_data:
+            writer.writerow( {"Time": el[0], "ClientIP": el[1], "Operation": el[2], "ResultStatus": el[3], "User": el[4], "Object": el[5] } )
+
+    with open("o365-parse-clientips.csv", "w", newline='') as csvfile:
+        fieldnames=["Client IP", "Count"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for el in tt_data_1:
+            writer.writerow( {"Client IP": el[0], "Count": el[1]})
+
+    with open("o365-parse-operations.csv", "w", newline='') as csvfile:
+        fieldnames=["Operation", "Count"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for el in tt_data_2:
+            writer.writerow( {"Operation": el[0], "Count": el[1]})
+
