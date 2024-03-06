@@ -1,0 +1,556 @@
+Appr00400090001-8
+SOVIET INTELLIGENCE
+COMMUNICATIONS
+
+FEDERAL BUREAU OF INVESTIGATION
+UNITED STATES DEPARTMENT OF JUSTICE
+	J. Edgar Hoover, Director	
+
+
+SOVIET INTELLIGENCE
+COMMUNICATIONS
+September 1952
+FEDERAL BUREAU OF INVESTIGATION
+UNITED STATES DEPARTMENT OF JUSTICE
+J. Edgar Hoover, Director
+
+TABLE OF CONTENTS
+INTRODUCTION .i
+
+OPEN CHANNELS . 							1Headquarters Communications Procedures. . . . .1	Diplomatic Couriers. 						6			Secret Section Facilities Abroad. . . 						8	Operation of the Secret Cipher Section, . . . . 		10	Secret Section Personnel . 								14	Cipher Pads and Code Books. 								15	Microphotography . . . . . . . . 							17CLANDESTINE COMMUNICATIONS . . . . . 						
+Clandestine Communications in the21	United States. 							21	Sorge Network. . 							
+Communications in Western Europe,24	World War ll . . 							32	Radio Operations in Sweden (1939-42). . . 						
+Postwar Developments in Clande stine43	Communications o . . . 							46Current Clandestine Operating Techniques. . . .49	Automatic Transmitters. . . 							56	Microdots. . 										56	Secret Inks and Open Code. 							57CONCLUSION . . 						59
+Introduc tion
+ An ideal counterintelligence operation is the pene -
+tration of an adversary's communications between the service headquarters and. the ope rating networks. It is this source which offers the most complete and most authentic account of the activities being
+conducted. It is necessary, therefore, that his communications p.rocedures be understood, and it is with this purpose in mind that the present study of Soviet intelligence communications is undertaken.
+It is being divided into two parts: (l ) the open and
+ostensibly legal channels, as now available in the United States, through official Soviet missions; (2) the clandestine channels which would be necessary were the official delegations to be withdrawn from the United States. Inte rnal communications within the various networks, always clande stine in nature, are not within the scope of this paper.
+- i -
+
+SOVIET INTELLIGENCE COMMUNICATIONS
+1, OPEN CHANNELS
+                The term "open channels, as used herein, refers to: (l) enciphered cable and radio traffic transmitted through commercial facilities by Soviet trade and diplomatic establishments; (2) the Soviet diplomatic couriers. The first is used for brief and urgent messages; the latter for the main burden of intelligence traffic u
+                A.lthough, properly, a distinction could be made, cornmercial cablegrams and radiograms will be considered as one medium and will be generally referred to as "cable" traffic.
+Headquarters Cornmunications Procedures
+The procedures for handling sec ret communications
+at the Moscow headquarters of Soviet Military Intelligence (GRU), although somewhat dated, have been de scribed by two reliable sources Comparable information is not available concerning the handling of communic ations at the headquarters of the Foreign Directorate of the Ministry of State Seéurity (MGB). However, the procedures
+would seern to be gene rally the same, being gove rned by prescribed rules for handling secret comrnunications, which are in effect throughout the Soviet State apparatus. It might be noted, in this connection, that "secret sections" are established in all Soviet enterprises for the handling of secret papers and are said to function under regulations promulgated by the MGBO The secret section personnel, how.
+ever, is recruited from the most trusted Party or Komgoznol members in the particular enterprise and is not necessarily MGB personnel
+With respect to incoming and outgoing cable. traffic ,
+Ismail Akhmedov, forme r ly chief of an operating section in GRU headquarters in Moscow, has given the following account of the procedure in effect there during h.is tenure, 1940 and 1941:
+All outgoing communications prepared by him or his
+subordinates were drafted personally and by hand and were passed by hand to the chief of the code section. This latter section was in a walled -off portion of the headquarters building, accessible only through a locked and guarded fireproof door, admission to which wag restricted to the chief of GRU or his immediate assistant and code sec tion personnel. After being enciphered, the me ssages were trans mitted from there to the cable facilities. A more complete supplement,
+- 2 -
+in many instances, was then prepared and transrnitted by the diplo-
+rnatic pouch.
+                  Similarly, inc oming me s sages were received in the code section, were deciphered, and distributed by the chief of the code section to the various chiefs of the operating sections. All
+me s sages sent to and received frorn a re sident abroad were filed in
+that resident's dossier r
+                 Igor Gouzenko served for a year as a cipher clerk in the secret cipher section at GRU headquarters in Moscow prior to his assignrnent in June, 1943, as cipher clerk for a Military Intelligence
+network in Ottav.r a. He stated there were about 150 cipher clerks in the cipher section at that tirne , with each clerk handling up to 3000 groups (i. e. , groups of five figures) per day. Gouzenko e stimated the messages averaged frorn 150 to 200 groups each, indicating about
+3000 messages incoming and outgoing daily at that comrnunications
+center. The serial nurnbers appearing on messages from the 'I Centre tl
+to the chief of the network in Ottawa, as set forth in the Report of the
+
+Royal Comrnission, ranged frorn Nurnber 10, 458 on July 30, 1945, to
+Number I l , 955 on August 22, 1945. This would indicate about 1500 cable dispatches emanating from GRU headquarters to operations
+- 3 -
+abroad in less than a month and is probably a more accurate figure than the former estimate.
+                 The nurnbers in sequence on messages from the network in Ottawa to the "Centre*' ranged from 209 on July 12, 1945, t.c
+275 on August 30, 1945, or 65 cable dispatches to Moscow in the intervening 50 days.
+                  These figures give a glirnpse of the extent to which Soviet intelligence operations abroad rely upon enciphered cable transmis sions.
+                 It might be noted here that Soviet establishments in the Far East and in several of the European countries instead of using
+c.ommercial facilities have made use of their own radiotelegraphy hookup with Moscow. This practice, which seerns to have been dictated by geographical considerations and cost factors, has not been the rule in Soviet operations in the United States. Although the former
+Soviet consulates in New York and San Francisco were equipped with radio stations, their known use for intelligence purposes was limited to one se ries of clandestine communications. This will be described in a subsequent portion of this study.
+- 4 -
+With respect to mail to be transmitted via the diplo-
+matic pouch, Akhmedov gave the following account:
+Such mail was sent under a triple cover. The inner-
+most cover bore the name of the resident (i. e. , a GRU officer) for
+whom the message was intended. The second cover bore a code narne indicating the mission official responsible for passing the communication. (It will be seen in the following page e that this 1 s probably the chief of the mission's secret cipher section. ) The third
+and outer cover addressed to the open head of the mission; in an embassy this would be the ambassador. The envelopes were sealed in five places, one seal in the middle and one at each corner.
+The message was then taken by the officer responsible
+for it in person to the dispatch room. There it was handed to a courier responsible for taking it to the Foreign Office (Ministry of Foreign
+Affairs). The c ourier, according to Akhrnedov, was invariably a "GPU rnan. It Elsewhere, this source has stated that diplornatic couriers were selected from both GPU (later NKVD and currently MGB) personnel and Soviet Military Intelligence (now GRU) personnel, although preponderantly from the former.
+
+                The question ariseg as to whether all mail sent by the diplomatic pouch is enciphered. In this connection, Gouzenko has
+stated that only that portion which identifies agents, places of meetings, addresses, telephone numbers, and other c.ompromising detail is enciphered, but he did not indic#e whether a light or heavy cipher was used.
+Diplomatic Couriers
+As noted in the foregoing, Akhmedov commented that
+the diplomatic couriers are selected from GPU (now MGB) and GRU personnel. He said these selections were made with the approval of Georgi Malenkov of the Politburo. When they are assigned aa couriers, they are under the supervision of the Foreign Office.
+                 Akhmedov and other source B have stated that couriers usually travel in pairs when accompanying mail. Sources familiar
+with the habits and movements of Soviet couriers in the United States have corroborated this. While traveling, they eat and sleep in shifts and, whe rever possible, obtain closed compartments. Several sources have stated that Soviet couriers are armed while accompany-
+ing mail.
+It might also be noted that a Soviet courier assignment
+i8 regarded as most de sirable duty, and rnany have strong personal connections with high Soviet officials.
+Soviet couriers entering and leaving the United States
+since the end of World War Il have traveled mainly by air, Only when accompanying very bulky mail would other passage be likely. They are met at the airport by a car from the local Soviet mission and by one or more representatives of the mission. Logically, the latter would be connected with the secret cipher section, which will be de-
+ecribed in the following pages. On their departure, the couriers are accompanied to the airport in a Soviet car.
+                 The couriers' baggage frequently consiöts of several pieces: suitcases, brief cases, boxes tied with rope, and canvas pouches. The most secret mail, it appears, is carried in the pouches, which are reported to contain special compartments for the intelligence services' 35 mm. film. The descriptions of the Soviet pouches Mave varied. One reliable source states that rnany are O to 12 by 18 to 20 inches, bearing wax seals and metal fasteners, and free quently are tied with cord. Others have described them as up to 28
+inches in length and leather-reinforced.
+                 From several sources there is information that Soviet diplomatic pouches, during the 1930's at least, were equipped incendiary devices which could be set off instantly by the courier in an ernergency. In one account the source said the pouch was built with a shallow compartment across the bottom which was filled with a highly combustible chemical. A cord extended from this compartment up the inside of the pouch and out the top where it could be reached without opening the pouch. This connected with a detonating device for igniting the chemical and thus destroying the pouch and contents.
+Secret Section Facilities Abroad
+                One section of each Soviet consulate, embassy, or commerc.ial establishment abroad is set aside for the processing of secret communications and the rNaintenance of secret files. Incoming messages are received there, and outgoing messages to be
+transmitted by cable or pouch are handled in that section, which is referred to as the "secret section" or "secret division. The following is a composite desc ription of such facilities received from a number of reliable sources:
+This suite of rooms, described by some sources ae
+vault type, is separated from the rest of the establishment by steel doors which lock from within. One or more members of the secret section staff are in constant attendance. To gain entrance it iB necessary to summon an attendant by pressing a bell or buzzer. The suite is subdivided into an outer and an inner section, in some instances, by steel doors. The outer rooms are reading rooms where authorized personnel may review sec ret communications directed to their attention. The inner rooms are reserved for cipher clerks and their organizational superiors, The windows in this section are equipped with iron barg and steel shutters, Each secret section is provided with an incinerator for burning secret papers, and the suite is partially fireproofed with sheet metal facings on the inner gideg of nonfireproof doors.
+                 Sources also agree that firearms are maintained within the secret section for use in an emergency.
+                Akhmedov, referred to in the foregoing, was assigned to the Soviet Embassy in Berlin on June 22, 1941, when Germany invaded the Soviet Union. He states he personally assisted in burning secret papers in the secret section of the embassy, even while
+the German police were attempting to gain entrance" He said the se
+papers were burned on the floor of the secret section, Benzine and other inflamma.ble material, maintained for that purpose in the secret section, were used to hasten the burning,
+Operation of the Secret Cipher Section
+The best available inforrnation conce rning the sec ret
+cipher sections in Soviet establishments abroad seems to be that furni8hed by Igor Gouzenko on the unit in the Soviet Embassy in Ottawa. This can be augmented somewhat by other sources, cenerally in agreement.
+The secret cipher section in Ottawa was located in one
+wing of the building, isolated from the remainder of the offices by sueel doors, and was accessible to cipher personnel and to the rank-
+ing service officials in the Embassy. It consisted of eight rooms, seven of which were assigned to the various cipher clerks. The eighth served as a central message center and secret file room. Only the chief of the secret section was permitted regular access to the latter room.
+
+                 Five separate services were represented on the cipher staff. Each service worked independently of other se r vices within the unit and under the direction of his service superior. Thug, the Foreign Office clerks worked under the Arnbas gador, the Ministry of Foreign Trade clerks worked under the Comme rcial Seer retary, a clerk was designat.ed to handle the communications of the Communist Party representative in the Emba.ssy, and cipher clerks were assigned to the then NKVD resident chief and the Military Intelligence resident chief. This latter position was the one held by Gouzenko, working under the Military Attache.
+                 Each service was furnished its own code and cipher system, and access to it was limited to the clerks and their service chiefs,
+                  The chief of the secret section was responsible for security within the unit, for coordinating the incoming and outgoing cornrnunications, and for rnaintaining the sec ret files and papers. While it is indicated that the chief of the secret section in Ottawa had no cryptographic duties, sources familiar with other Soviet installations indicate that one o.f the cryptographic employees is de signated
+as the chief, which duties are supplementary to his regular work. It would al 80 seern that this key post would be one sought after by the MGB representation in keeping with its security responsibilities in a mission abroad. *
+The incoming sec ret communications, received by
+cable and pouch, were delivered to the chief of the secret section (anotier source stated that all mail is delivered to the chief of the secret section); it was his responsibility to sort the communications and deliver them to the proper officials, The chief collected the outgoing communications; both cable and pouch messages, ard was re sponsible for their dispatch. In this way outgoing cable dispatches emanated from the same person and bore no readily distinguishable characteristics, whether they were regular Foreign Office or intelli-
+gence traffic .
+                 Similarly, the chief made up the outgoing pouches and turned them over to the couriers.
+                  The chief of the secret section in Ottawa was responsible for maintaining the central safe and sec ret file room, A clerk
+* It has been asserted that the secret sections are operated under the supervision of MGB. This is not taken as necessarily correct, although it is probably true that some chiefs of secret section have MGB connections.
+was required to place his code books, cipher pads, and clear text messages in a pouch which he sealed with his own wax impression when they were in use. The pouch was then turned over to the chief, who placed it in the central safe.
+                 A similar arrangement was in effect in the Soviet Embassy in Berlin, according to Ismail Akhmedov, in June, 1941. He said the secret section included an inner room which was accessible only to the ambassador, the chief resident of NKVD, the cipher men, and the wireless operators. Some of the cipher men were sometimes excluded from the inner room. This roon-x contained a single safe. The chiefs of the intelligence services maintained pouch-type bags in which were placed the working materials, which were sealed and delivered to the cipher man having custody of the safe. Such pouches were duly registered and placed in the safe.
+                 In Ottawa Gouzenko maintained a safe in his own cipher room for the Military Attache, in which he was permitted to retain reports on agent networks, notes on contacts with agents, the Militar y Attache's diary, and other ope rational and administrative papers. Clear text copie s of enciphe red or deciphered communications between
+Ottawa and Moscow were, as we have noted in the foregoing, placed
+
+in the pouch and deposited in the central safe. These were filed in numerical sequence, with a new series beginning the first day of each year.
+Although Gouzenko was the only cipher clerk assigned
+to the Military Attache in Ottawa, it might be of interest to note that he learned from one of his associatee that the Soviet Military Attache in Washington, during the game period, had five cipher clerks assigned to handle intelligalce traffic .
+Secret Section Personnel
+Several Soviet defector sources have referred to the
+restrictions imposed upon the secret section staff in their social activity. They are ordinarily not permitted to have any contact with persons outside the Soviet staff, and fraternization with noneecret section Soviet personnel is not encouraged. Living accommodations frequently are provided for the secret section personnel on embassy or consulate premises. Sources familiar with the habits of secret section workers in Soviet establishments in the United States agree that their outside contacts are severely restricted. One such em.
+ployee has indicated he is not permitted on the streets after 10:00 p. m.
+ 14 
+Cipher Pads and Code Books
+                 The Soviet inte Iligence communications transrnitted via commercial facilities are, of course, tightly enciphered. The conversion of the original Russian words of a message into the final cipher text of numerals in groups of five digits is a process which is outside the scope of this study. It may be de scribed briefly, however, as a two-step operation. In the first stage, Rvssian plain-text words are converted into five -digit groups by reference to a code book. This code book consists of a list of alphabetically arranged words and phrases together with five -digit equivalents for each word and phrase. The second stage, or final step, involves the use of a sheet of random five -digit numbers which are added to the numbers obtained from the code book. These sheets of additive keys are removed from a pad and are used one time only. Thus there are two instruments necessary for effecting a coded message, a code book and a cipher pad.
+                 Sources farniliar with Soviet intelligence procedures are in agreement that the code books are changed perhaps at sixmonth to one -year intervals. The code books used by Igor Gouzenko in Ottawa were bound in a blue cover and were about six by nine inches
+- 15 -
+in size. The outer cover bore the Russian equivalent of "Secret" in the upper right-hand corner, and the equivalent of "Copy Number
+in the same location, In the center of the cover appeared the equiva-
+lent of "Code" followed by letter and number. (Thus: "Code A -22")
+Two pages of the code books contained instructions on its use.
+The cipher pads are furnished to the intelligence serv-
+ice. abroad at much more frequent intervals. One source estimated that new padB would arrive about every two weeks. Each sheet of the
+pad is used once and then de stroyed, hence the term t 'one -time pad.
+The pads used by Gouzenko bore the seal of the People t s Commissariat of Defense, then the body to which the Soviet Army, and thus the
+Military Attache, was ultimately re sponsible. Gouzenko desc ribed the pads as follows :
+         Each branch of the service had its own seal and all were diffe rent. The pad is bound in celluloid, with the binding lace going through brass eyelets in the celluloid. The top cellulon binding is a strip around the pad. The bottom celluloid binding is solid and bears the word "Inflam-mable" printed the re on.
+        The ends of the binding lace are broughg to the top cover and the seal is placed over the ends (of the lace). Underneath the top cover are two sheets Of black paper which must be removed before using the pad. The numbers are arranged in horizontal rows of 5 in each row, with 10 rows to the page.
+- 1 6 -
+                 Gouzenko diagramed a cipher pad on a scale of 3 1/2 by 4 1/2 inches. This may or may not be its true size, since he did not indicate the reon. However, another Soviet defector, referring to the ' t one -time cipher pack" in use by the Soviets in 1940, said they were contained in grey or white sealed envelopes, about four by five inches, which bore five seals stamped in red sealing wax. This source said the envelope contained a number •ery thin slips of paper separated by black paper. Each Blip contained ü2e cipher numbers to be used on a particular date.
+Mic rophotography
+                  A study of Soviet intelligence communications would be incomplete without comment on the use of mic rophotography, Thirty-five mm o undeveloped filrn is almost universally used in Soviet operations to convey documentary intelligence to the "Centre. It has been noted in the fore going that material qualifying as to brevi.ty and urgency may be dispatched by cable. However, in certain lines of operation, for exarnple in the field of technical and scientific de velopment, it is necessary for the intelligence services to obtain complete documents for the accomplishment of their liliesiorz. There
+ 17 -
+an obvious advantage in submitting a complete document rather than an intelligence agent! s uninformed version of its contents. Copy-
+ing such documents on 35 mm. film is practic.al from the standpoint of security and space. Therefore, we can look for this process at one stage or another in an ope ration.
+                In some instances the source -agent with access to sought-after documents is trained and equipped far this work. For example, and it is only one of many which might be selected, Andrei
+Schevchenko, a Soviet official on the Amtorg staff in New York City, in 1945, attempted to penetrate the sec ret library of an American airc raft manufac turer. Afte r the build -up proce ss, i.n which Schevchenko felt he had gotten a measure of control over the source, he produced a Zeiss Ikon camera, giving it to the source together with instructions in document photography. He later tried to get the camera back when the source failed to produce the de sired results. For a time, however, the source, under FBI control, turned over to him .i.nformation cleared for the purpose on rolls of film. At one point the source told Schevchenko he would like to learn to develop the film himself, but the latter insisted he wanted only undeveloped film, This, of course,
+- 18 -
+iB a security precaution. If the container were opened other than in a darkroom, the film would be ruined and evidence de stroyed. Another security note, in this connection, is in the fact that Schevchenko excused himself immediately after the delivery
+  of film was made to hi.m on the pretext that he had to meet another person. Later he returned to the source, giving him further lengthy instruc tions on the use of the carne r a. Pre sumably he wanted to get rid of the film as quickly as possible, undeveloped or not.
+Any open Soviet establishment will, of course, be
+equipped for document photography; and, in the interest of security and space, bulky mate rial can be copied upon reaching there and transmitted as undeveloped film by courier.
+The photography also might be handled on an inter-
+mediate level, between the source and the Soviet establishment. There are nume rous instances available from Soviet operations in
+	the United States of this practice. For example, the Ovakimian network, during the mid- 1930 8 s, n-xaintained cover apartrnents in New
+York for this purpose. Of more recent date the Julius Rosenberg group maintained cover apartments equipped with photographic laboratories. A complete laboratory was maintained by Nathan Gregory
+
+- 19 _
+Silvermaeter in the basement of his own re s.i.dence in Washington,
+D. C. , where, according to Elizabeth Bentley, he and hiß associate, Ludwig Ullman, photographed docurnents which they obtained tempo- rarily. It would serve no purpose to recount the many instances in
+Soviet operations in the United States in which microphotography has been employed. It is characteriati.c o ( nearly all of them. The Leica carne ra, or sirnilar 35 m-m. models, usually be found in
+the paraphernalia of a Soviet career agent.
+The foregoing outlines the communications mediums
+available to the Soviet networks ope rating at the pre sent tirne in the
+United State B. Were the various Soviet tni.ssions to be withdrawn, the networks remaining in operation would be required to employ
+clande stine facilities, infe rior as to security and capacity.
+- 20 -
+11. CLANDESTINE COMMUNICATIONS
+Three mediums are usually suggested when clandes-
+tine intelligence communications are being considered: agent radio, courier, and mail. The latter term includes ! t rnic rodots, secret writing or open code letters directed to designated mail drops. The present study indic ate s that Soviet operations,
+under strictly clande stine conditions, have relied agent radio wireless telegraphy) for the main link between networks and the USSR, augmenting this main channel with courier and mail traffic. However, it should be noted that courier and mail links are less likely to connect a network with the USSR than with an open
+Soviet establishment in the same or a nearby country.
+Clandestine Comrnunic.ations in the United State s
+                  The early Soviet intelligence operations in the United States were sustained largely by clande stine courier comrnunications. During the late 1 920' s and the very early 1930's, seamen, particularly on ships between Hamburg, Ge rmany, and New York,
+- 21 -
+were used as couriers by the networks headed by Alfred Tiltin,
+Moische Stern, and others. Funds for the networks were supplied through this mediurn and the intelligence produc t.ion, much of it on
+35 mm. filrn, was transmitted through this channel. Whittaker
+Chambers, Robert Gordon Switz, Ni.cholas Dozenberg, and others connected with the se early Soviet networks have desc ribed the seamencourier systern.
+                 The late Walter Krivitsky, a Soviet. intelligence official until his defect.i.on in 1937, stated that the Soviet Military Intelligence service began organizing a courier systern among searnen in
+1 926, with Hamburg the cen.ter of this activity. About 200 seamen on ships between German and American ports were enlisted. The systern was still functioning in 1937, but Krivitsky felt it was being used only to test its efficiency in the event war interrupted other c hanne 1 s .
+                 Following the e stablishment of diplomatic relations between the United States and the USSR in 1933, the need for such channels becarne less urgent; and in this country in recent years
+clande stine mediums have been relatively unknown in Soviet cornrnunic.ations -excepting, of course, inte rnal communications within
+- 22 -
+networks. However, seve ral operations in Latin America, during
+the late 1930 2 s and early  were linked with open Soviet channels in the United States and were directed by Soviet officials in this country. Clan.destine couri.ers and a system of mail drops for enciphered secret writing messages were employed.
+                 A series of letters between New York and Buenos Aires, and New York and Mexico City, inte rcepted by censorship beginnimg late in 1941 and continui.ng into 1943, were found to contain enciphe red me s sages. The Mexico City letters, relating to Soviet intelligence efforts to free Frank Jac son, Trotsky* s assassin, from prison, indicated many of the message series were not getting through on schedule to the mail addresses. Perhaps for this reason, a New
+York school teacher, Anna Vogel Colloms, in August, 1943 Wa S dispatched to Mexico City as a courier. A box of blank stationery taken from her possession at a Texas border station revealed severa] pages of i.nvisible writing in cipher.
+The sec. ret writi.ng letters between Buenos Aires 4nd
+New York concerned, in part, the establishment of a radio Link be-
+tween the two cities.
+One of the letters , postmarked in New York, February I ,
+
+- 23 -
+1 943, set up a schedule of call letters and broadcast times between two clandestine radio stations, one. located in the New York area and one located in the Buenos Æres area. Beginning in the same month, and closely conforming wi.th the schedule given in the letter, a station in New York, believed to have been located the Soviet Consulate the re, made repeated attempts to contact the Buenos Aires qtation.
+This station used the sarne cipher as the letter of February I , 1943.
+The traffic was discontinued in October, 1943	which time * or shortly thereafter, seve ral South Ame rican countries had received
+Soviet trade or diplomatic mi.ssions. Thus, official channels may have been made available to the network in. question.
+                Soviet networks in other parts of the world, however, have found it necessary to use clande stine channels to a large degree, and it might be useful to study son-ze of the more important operations from a' communications standpoint.
+Sorge Network
+                 Richard Sorge was assigned to Tokyo in 1935 Oü an undercover mission for the. "Fourth Department," as Soviet Military
+Intelligence was then known. He was a Ge rrnan Cornrnun.ist who
+- 24 -
+entered the service of the Comintern during the late 1920 t s. Later he transferred to the intelligence se rvice. He had an established reputation as a  succeeded in submerging his Com.munist history, represented a reputable German newspaper in Tokyo, and gained complete acceptance in German official and social circles there. With such cover Sorge operated as remotely as possible from Soviet official channels. It was not until 1940 that he was given liaison with the Russian delegatio.n in Tokyo, and this was at his request.
+Several times a year members of the Sorge network
+were dispatched as couriers with rolls of 35 mm. filrn to either Hong Kong or Shanghai, where they met Moscow couriers. Arrangements for such contact had been made by Sorge l s radio station. In addition to delivering the filin (Sorge sornetimes accurnulated 25 to 30 rolls between deli.veries), the couriers returned with funds for Sorge ope ration.
+By 1 940 travel into and out of Japan had come under
+rnore strict control, and Sorge had difficulty in safely passing his couriers through to China. For this reason he asked Moscow for liaison in Tokyo; and Moscow approved, although with sorne reluc tance. Periodic meetings, participated in by Sorge, or one of his
+- 25 -
+group * and officials of the Soviet delegation in Tokyo (unknown to Sorge et al, but identified from photographs of Soviet personnel in the possession of the Japanese police) then began, with character-
+i.stic recognition signals and clande stine rende zvous. After this H- aison was established, Sorge t s microfilm reports to the U Centre f ' were passed on through this medium, and funds for the network were received in the same way. Such meetings were, however, set up through Sorge*8 radio cornmunication system.
+                 Ln October, 1941, Sorge, hi B radio operator, Max and the remainder of the network were arrested by the Japanese police. The details of Sorge*s ope ration, disclosed in a Japanese police report, have subsequently been made available. Portions of this account dealing with the radi.o operation are selected
+here to illustrate the technique involved.
+Max Klausen, also a Ge rman• Comrnunist* wag trained
+as a radio technician in the Soviet Union and was assigned to Sorge'B network in Japan in 1935. Klausen used a corn:nercial cover. At first he engaged in an export business, dealing in general merchandise. Later he was established in a srnall rnanufacturing business.
+Like Sorge, he successfully concealed from the German conununity
+- 26 -
+in Tokyo his Con-nnunist background and was completely accepted in it.
+                   Klausen assembled his first transmitter and receiver  shortly after his arrival in Japan from parts which he purchased in Tokyo, except for a telegraph key which he brought with him. He later built other un.its and seerns to have been pleased with the fact that they were cornpact enough to fit in.to two suitcases, in which he carried thern to and from his various broadcasting ?I ecations. More current Soviet radio equipment i.s , as will be seen in a later portion of this study, rnore cornpact in construction.
+                  Klausen alte rnated between his own re sidence and the residences of other Inernbers of the network for his radio operation. These locations were selected with the following con.siderations in mind: (l) an upper floor for elevation; (2) a wooden f ran-re dwelling to allow better transmission and reception; and (3) a densely populated area to make direction finding more difficult.
+                 Klausen e s 100 watt equipment was estimated to have been capable of a 1200 -mile range. He believed that his control station was in Eastern Sibe ria, possibly Vladivostok, Kornsomolsk, or Khabarovsk; but he had no certain knowledge of its location. The
+- 27 -
+Japanese Communications Ministry, on the other hand, believed the control station was in the direction of Shanghai, at least until 1940. In this connection, it appears that the Japanese police picked up Bignals from Klausen t s station over an extended period but were not successful in locating the station or in deciphering the messages until leads from other sources led them to Klausen.
+Although he was aware of the effectiveness of mobile
+direction finders 9 Klausen seems to have been confident that the Japanese police had not developed this technique; he said he assumed his broadcasts were monitored but felt he would not be traced cloger than a "few kilometers. He alte rnated his location, avoided long periods of transmission, alte red wave lengths and call letters, and was careful of outsiders. In his personal conduct, his rule was:
+act cheerful before others, to look stupid, and especially to make it known I was interested in amateur radio. He hired his domestic help for day service only. He dismantled and concealed his equipment when it was not in use (in a wardrobe trunk), estimating that he could assemble and be in operation in ten minutes and dismantle in five
+r-n.inutes. He avoided an outside antenna, stringing twinQ)raided copper wire about 25 feet long inside the room.
+- 28 -
+                 Klausen was not entrusted with the cipher until 1938. The outgoing communications were enciphered by Sorge and handed to Klausen. The incoming messages were handed to Sorge still in their cipher. Sorge said he obtained special permission from Moscow to teach Klausen the cipher in 1 938 in order to relieve himself of the
+burden, but felt that this was an exceptio.n to the rule that the cipher "was revealed only to the head of a network. Contrary to Sorge's belief, however, many other Soviet operationg have disclosed that radio operators more often than not do their own cipher work.
+                 The re is no indication that Sorge and Klausen re stricted their contacts with each other. Incoming and outgoing messages were exchanged at meetings in restaurants and other public meeting places. On other occasions they openly visited each other's home,
+                   The basic cipher key employed by Sorge and Klausen, by which one and two-digit numbers were substituted for individual letters of the alphabet, was rnernorized. This constituted the first step in the enciphering operation. A-gecond step, introduced to make the cipher more secure, consisted of adding numbers to the basic cipher key nunbers. The numbers used for adding were obtained from tables appearing in the *'Gerrnan Statistical Yearbook,' l a book
+which was in keeping w.ith their cover, The me s sage itself contained an indicator group, giving the receiver the page and colurnn of figures being used. Ordinary rne from the Soviet station were signed
+i / Dal i t (Russian equivalent for "Far East"), -and this was later changed to t 'Organizer. Messages signed "Director" were either major directives * issued by the chief of Military Intelligence in Moscow, and recognized as such by Sorge, or special congratulatory
+or anniversary greetings.
+                 Japanese police officials commented that the code system ernployed by the Sorge network was ideal from the standpoint of security. The cipher was difficult to read because of the rare
+recurrence of the same syrnbols due to the use of the "Ge rman Statistical Yearbook. ' l It was stated that normally, when an additive tat.'le is ernployed, its length is lirnited, but this book offe red an almost infinite variety of figures. The code key was easily mernorizable by the ave rage person; and, ' 'as long as the user took care to rernove coded rnessages from his person and to burn all evidence immediately after transrnission, the Japan.ese authorit.ies felt that a house search would have been unproductive.
+- 30 -
+                 Until the "Chinese Incident" (1937) when the volume of traffi.c was relatively small, all radio con.tact was initiated by the control station. Ln each incoming me ssage the time and date for the next contact would be stated. During this peri.od contact wag had at least once a week. Beginning in August, 1938, Sorge was notified that the Soviet station would stand by for calls from him during the first fi fteen rni.nutes of every hour. Klausen found that daybreak and sunset hours were best for transrnission, but he rnost frequently operated duri.ng the 4:00 p. m. to 7:00 p. m. period. Notwithstanding the earlier cornrnent made by Klausen that he did not stay on the air for a long period, he el sewhere stated he often worked in a four-hour
+stretcha
+                 Klausen went on the ai.r 60 time s during 1939, dispatching about 23, 000 words. About the same volume was handled in 1940. Duri.ng the nine I-nonths the station ope rated in 1941, he broadcast about 20 times and dispatched about 13, 000 words. Thus, in spite
+of liai son arrangements which Sorge was given in 1 940, he continued to rely heavily on his agent radio.
+After the outbreak of tlæ Russo -Ge rrnan War, Sorge
+stated; he cut down on long reports and bulky documents and
+- 3 1 -
+concentrated on reporting essential facts by radioa
+Commu.nications in. Weste r n Europe 9 World War Il
+A volume of Inaterial i.s available for the study of Soviet
+intelligence cornmunications under stric tly clande st.i.ne conditions in
+Western Europe dur.ing and in the period just prior to World War Ll.
+After June 21, 1941, when the Gerrnan invasi.on o. F: us sia was launched, the Soviet networks in Germany and We stern Europe becarne heavily reliant upon secret agent radio. Much of the inforrnation concerning Soviet operations. during the period cornes from German counterintelligence records, which are in some instances fairly complete and in others only fragrnentarye Recogn.iz.ing that all the facts are not available, it seerns to be correct to say that a number of very effective Soviet networks capable of developing intelligence of high value to the Soviet Union were, by 1 943* either eliminated or cut off by comrnunications breakdowns. These breakdowns can be traced to German successes in locating agent transmitters, to effective house searches whi.ch produced inforrnation on the network structures and ciphers, and to Gern-xati successes in eliciting cooperation from net-
+work members when taken into custody.
+- 32 
+The Soviet intelligence services were not completely
+unprepared for the eventuality confronting them on June 21 , 1941. Ismail Akhmedov, identified in the foregoing, said each resident of Military Intelligence abroad was equi.pped with his own wireless. These were 100 watt portable units for emergency use, in anticipation of wartime conditions.
+                 A German intelligence report, dated just prior to the opening of hostilities between Russia and Germany, desc ribed Soviet efforts to establish t 'a chain of secret radio stations in Berlin, and other important cities of the Greater Reich, as "almost provocative. These efforts were reported to have been headed by one Kobulov, the Soviet Embassy Counsellor, described as a "GPIJ" official. The same report also desc ribed the roundup of 6() persons in Czechoslovakia and the confiscation of a dozen sec ret radio stations during the same pe riod.
+                  Tn spite of the pre sence of Soviet official representation in Germany up to the date of the invasion of the Soviet Union, much of the Soviet intelligence activity against Ge rmany after the
+Nazis suppressed the German Communist Party was directed from
+- 33 -
+the neighboring Low Countries and France. The re sident directors
+of those operations relied upon the official Soviet channels until June,
+1940, when they were di.srupted by the Gerrnan occupation.
+                A network headed by Leopold Trepper, established in. Brussels under a comrnercial c.over in 1 938, rnaintained com.muni-
+cati.ons through the Soviet Trade Delegation in Brussels, until it was withdrawn in June, 1940. Trepper then rnoved to Paris and estab-
+lished contact with the Soviet Military Mission at Vichy, which, in turn, was withdrawn in June, 1 9410
+                  A branch of Trepper l s organization, meanwhile, continued to function in Holland and 'Belgiurn. Dutch, Belgian, and
+exiled German Communists, together with several Soviet nationals
+(documented as Latin Ame ricans, Finns, etc. ) , made up this group.
+An export-irnport cornpany, with affiliated branches in Brussels and Paris, served as a cover for funds and communications and enabled
+the organization to continue and to expand contacts inside Germany.
+                After the German invasion of Russia the Trepper organizati.on and the other Soviet networks in We stern Europe were completely reliant upon agent radio for contact with the "Centre.
+- 34 -
+In those areas in which the German radio control organization could func tion such stations were rapidly silenced.
+The first rnajor break for the Ge rmans was the un-
+covering of a station operated by the Trepper organization in. Brussels in Decernber, 1941. Several of the group were arrested, a complete photographic laboratory was seized, a quantity of counte rfeit
+identity cards and a volume of plain-text and ciphered traffic confiscated. One of the principal agents 9 one Ma.-n karov, a trained Soviet radio technic.ian., walked into the arrns of the Ge rrnan police on the morning following the ra.id9 when he appeared at the house, unaware of what had taken place, with a set of Inessages for transmi s sion.
+The rernainder of Trepper Q s organization was then
+integrated with. a group headed by  Jeffremov, a Soviet national who arrived in Brussels in 1 939 undercover as a student of
+c hemistryø Jeffremov was documented as a Finni.sh subject. He had taken over a group of German and Dutch Communists, and late
+i.n 1 941 his group put an agent radio into operation. This station took over the Trepper coznrnunications with the "Centre,
+June, 19423 when it was located and confiscated by the German radio control organ.ization.
+- 35 -
+                 Documents seized in. this rai.d, together with the earlier seizure, enabled the Germans to fill out their knowledge of these Soviet operations to a large degree. Johann Wenzel, a Ge rman Communist long sought by the Ge rrnan police, was captured in this raid and under interrogation appears to have given away the cipher. Thi.s enabled the Gerrnans to decipher a quantity of back traffic and to uncover important network links inside Germany.
+One of the groups exposed was headed by Harro
+  Schulze -Boysen, a Luftwaffe officer assigned to staff work in the  German Air Ministry. Schulze -Boysen had liaison with an official of the Soviet Trade Delegation in Be rlin until the mission was withdrawn in June, 1941. The Soviet official turned an agent radio over to him at that tirne , but technical difficulties prevented him from establishing contact with the t 'Centre. 'T Late in 1941 one of the agents in the Trepper organization was dispatched from Brussels to contact Schulze -Boysen in Germany to assist in overcoming the technical difficulties, and to aid the group in getting into direct contact. This connection was exposed by the Brussels back traffic.
+                 Another group, headed by Arvid Harnack, an ernployee of the Ge rrnan Ministry of Economics also was uncovered. Harnack
+- 36 -
+had been con.trolled by the same official of the Soviet Trade DelegaEon and also had been fu•n.i.shed an agent radio for direct contact with the "Centre." Liaison was arranged between the Schulze -Boysen and Harnack groups to provide each with an auxiliary communications channel. Meanwhile, neither group succeeded in making radio contact, and a courier link between Schulze -Boysen and Brussels and between Harnack an.d the Soviet Trade Delegation in Stockholm was maintained until late in the Summer of 1942 when both groups were elimin.ated. Al together, 80 persons were arre sted, an indication that thi.s was a major blow to Soviet intelligence.
+                 Ramificati.ons of these Brussels seizures led to Holland, where seve ral agent radios- were silenced, only to be suc ceeded by others which had been held in reserve. When the reserve equiprnent was seized by the Germans, atternpts were made to parachute agents and equipment into Holland. The sarne pattern was followed in Ge r many. In gene ral , it rnight be said that the operations of the agent radios, if successful in rnaking contact with the "Centre,
+were short-lived.
+Me anwhile, Trepper and his organization in France
+made several attempts to establish radio communication with the
+- 37 -
+"Centre. 't Agent radios operated by the underground French Communist Party were placed at his disposal from time to time. All
+this activity came to an end late in 1942 when the German counterintelligence organization traced him through his business affiliation with the Brussels group, and uncovered his associates i.n Marseilles and Lyons .
+In June, 1943, Trepper escaped from German custody,
+but he appears to have given the Ge rrnans a degree of cooperation and to have compromised seve ral of his important associates before doing so.
+Ge rrnan counterintelligence rnade a concerted effort
+to play back the agent radios uncovered in France and the Low
+Countries, setting up a special organization to coordinate and control the counte rope rations. In some instances the original operators were at least partly cooperative. No great successes have been claimed for these attempts.
+                In neutral Switze r land, however, three agent radio stations, best known by the German code name "Rote Drei, served an irnportant Soviet operation in a rnost effec tive way until late 1943.
+A Gerrnan official has given the following account of the damage done
+to the Gerrnan cause by this Soviet group:
+	- 38 -	
+. in the most cri.tical peri.od on the eastern front, at the t.ime of the battles around Stalingrad and in the Caucasus, and then later in the spring, summer and auturnn of 1943, in those decisive days when the German armies in the southern and central sec tors of the eastern front were sweeping back, in those days when one expected that somewhere, perhaps on the Dneiper they would be able to make a stand, check the onrushing tide of the Rus sian armies, and build a new firrn front, precisely in those days, weeks, and months the rnost secret information regarding the troop units, strength, assembly areas, intentions, etc . was pas sing currently through Switzerland to Moscow. These we re exclusively matters which must have come from the highe st level of German military command.
+                 The Ge rxnan monitoring service first intercepted the traffic between the "Rote Drei'! stations in Switzerland and the control station in the USSR in June, 1941, and placed their position generally in the Lake Geneva region. They were quickly recognized as agent stations and henceforth were closely monitored. Not until 1944 was the cipher broken and the traffic read.
+The principal figure in the "Rote Drei p : group was
+Alexander Rado, an irnrnigrant Hungarian cartographer. Prior to June, 1940, he maintained communication with Moscow via Paris, with mic rofilm courie rs pas sing between his headquarter s in Switze rland and Soviet official channels in France. The occupation of France by Ge rman troops suddenly cut this link, and it was necessary to integrate his network with another group operating in Switze rland
+- 39 -
+which had already succeeded in e stablishing radio communication with the "Centre. One of the stations n-zade available to Rado was the one
+operated by Alexander Foote, who was rec ruited into Soviet intelligence when he returned to England in 1938 from se r vice in the
+Loyalist Army in Spain. He was first assigned to establish himself as a re sident in Munich, reporting out to a network superior in
+Geneva. Before this operation had progressed far, Ge rmany and Great Britain were at war, and Foote, using Brit.ia.h documents, was hastily withdrawn from Ge rmany.
+                 Foote then took an apartment in -Lausanne , Switze rland, passing himself off as a "leisured emigre Englishman. He was given elementary instruction in radio ope ration and at length installed a transmitter in his apartm.enta Foote's superior, a woman, also operated a unit in her re sidence near ueneva, This was later moved into Geneva and was operated by the proprietor of a radio repair
+shop. A third unit, operated by a Swiss woman Communist, w}R0 was trained by Foote, cornpleted Rado t s radio cornrnunications system.
+                 Foote, who has written an account of his operations in Handbook for Spies, states that Rado*s network consisted of son-xe
+
+- 40 -
+60 sources, and after June, 1941, the three stations were fully occupied in carrying his traffic. The urgency of the situation made it sometimes necessary to broadcast for hours at a time, in violation of security rules. In an enemy country, he felt, this would have led to early discovery, but in Switzerland appears not to have created much interest until later.
+Foote established contact with the Soviet control station
+through a fixed call signal on a fixed wave length. When the "Centre" replied to his signal, Foote then switched to his 't working wave length!' After establishing the initial contact, the "Centre" did the same. Foote felt this practice cut to a minimurn the possibility of radio monito ring.
+                 All Inessages were enciphered in five -digit groups. The first stage in the process was based on a memorized key for converting the letters of the alphabet into n.umerals. In the second stage -Foote calls it ' 'closing the cipher" -a passage taken from a text employed as a code book was also reduced to numbers, and the latter product added to the product of the first stage. It is of interest to note, as in the Sorge ope ration, Foote used a book dealing with statistics for the second process. * Recognition groups inserted into
+* Statistical Handbook of Foreign Trade, 1938, and
+Swiss Handbook of Trade Statistics, 1939
+- 41 -
+th.e ciphered text identified the page and passage used.
+In 1943 the Swiss authorities became intere Sted in
+the "Rote Drei 't network. Foote was not immediately located, but
+his companion stations were identified and rai.ded. In one of the
+raids copies of the plain-text me s sages, in some instances with an enciphered version attached, were found. This station was using Rado t s personal dpher, thus compromising it E!'oote, however , had his own cipher, and thus could con.tinue to function; during the ensuing weeks hi.s was the only link between the Rado organization
+and the *'Centre. The urgency of the sit.uation seems to have compelled the use of Foote's station in spite of the obvious danger.
+A few weeks after the companion stations were raided,
+the Swi.ss police located Foote* s transmitter. He had time to burn a few documents, and to put his set out of cornmission, before the police were able to break into his apartment. Subse quently, the Swiss
+attempted a play-back with this station, which failed, according to Foote, because Rado's cipher was used on the Foote unit. The
+Soviet station confirmed its suspicions by putting some "control questions" to the operators, who were unable to make the proper
+responses.
+- 42 -
+The surviving operations in Switzerland were thus cut
+off. These included the most valuable of all Soviet sources in warti.me Germany, a source which has never been completely identified.
+The mate rial, conceded to have come directly from the highe st German military circles, was referred to as the ' 'Lucy I ' source, and was funneled through Rachel Duebendorfer to Rado. In November, 1943, Duebendorfer wrote an open code letter to an a.cquaintance in Montreal, He rmina Rabinowitch, the contents of which are revealed
+in the Report of the Royal Commission, with instructions to pass it along to the Soviet Ernbassy at Ottawa. Through this means, Duebendorfer attempted to re -establish contact with the "Centre.
+It must be concluded that her situation was de sperate to justify so
+evident a security breach.
+Radio Ope rations i.n Sweden (1939-42)
+The Swedish Radio Control Section, operating in con-
+junc tion with the counte rintelligence police, located a number of
+clande stine agent radios being operated by Soviet intelligence during the 1939-1942 period. The networks for which the radio stations
+- 43 -
+were being operated were headed by Soviet officials on the staffs of the Soviet Iægation, the Soviet Trade Comxnissien, and the Soviet Travel Agency in Stockholm. One of the se officials, Stefan Artemiev of the Soviet Legation, took the trouble to explain to one of his radio technicians that "the international situation might result in the withdrawal of official Soviet repre sentatives .in Sweden and make necessary the use of radio transmittal in sending data to the Soviet Union. These cases seern to have been directed mainly toward
+information c onc e rni.ng Gæman rnilitary movements in the Scandinarian peninsula and the Swedish military defenses. Sorne of the stations already were in contact with a control station located near Moscow, while others were in the process of establishing contact. The stations were located in private dwellings, many of them enlisting aid from
+Communist Party members and syrnpathizerso
+                 One of the cases in this group, involving a youthful refugee named Lennart Katz, is of interest sin.ce it is an instance in which a radio ope ration was isolated from the reznainder of network activities. Katz put a station into operation in June, 1942; it was located almost immediatel.y and Katz was apprehended in the act of transmitting.
+- 44 -
+Katz, acting solely as a technician, neither enciphered
+nor deciphered. He received outgoing messages in cipher and delivered incoming ciphered messages at a cache in the remote countryside. His instructions were to check the cache on odd weekdays between 1:00 and 2:30 p. m. He never sawnæ identified the courier who visited this drop. On even weekdays Katz was under instrucHons to pass a designated street corner at the same hour of the day in order that the network could have him observed and be assured that he was not under arrest.
+                 This practice of using a cache as a liaison drop has been widely used by the Soviets in Europe and in recent years has been noted in connection with Russian operations in the United States. Further reference will be Inade to this device in a subsequent portion of this study.
+                In other cases in this Swedish group the radio technicians also pe rformed cryptographic duties. It was observed that the key bookb used in such instances, which were popular editions of Swedish literature, could frequently be identified in house searches by their well -worn appearance. In one case the cryptographer customarily had dirty hands, and his code book wag well smudged with finger irnpressions.
+- 45 -
+                In summing up this account of clandestine operations in Western Europe, it can be said that the services of many valuable sources and son-re entire networks were lost because they had to rely on agent radio, and in those areas in which the monitoring services were well developed, radio operations could not be concealed over an extended pe riod. The exceptional case was the group in Switze rland, where radio control seerns to have been ineffective
+until 1943.
+Postwar Developments in Clandestine Communications
+There is in evidence a more thorough course of train-
+ing, especially in agent radio technique, in the Soviet iAtelligence services. The curriculum of an eight-month training program offered prospective "illegal residents" of GRU in 1945 provided individual instruction and practice at various re sidential locations in and around Moscow, with no classroorn work, for obvious security reasons.
+                 Student agents were trained in the construc tion, repair, and operaton of agent-type radio, and in Morse code, broadcasting technique, methods of carnouflaging antennas, and in the
+- 46 -
+theory and pract.ice of radio di.rection finding (goniometry).
+                 Among the suggested measures for camouflaging antennas were the following: (l) stretch a third wire so it appears to be part of any exposed wires belonging to the electrical installation of a house; (2) simulate the installation of an electric wall plug for attach.. ing an electri.c iron or table lamp, but using one of the te rminals for the antenna; (3) forrn the antenna into a spiral and place it on the inside of a picture or mirror, using the end of the antenna to hang up the picture or mirror; (4) stretch the antenna on a balcony or in a court, so that it appears as a clothe sline; and (5) install the antenna as though it were part of the usual house -type radio equipment.
+On the theory that direc tion-fi.ndi.ng equiprnent could
+not be brought into and be in operation in an agent radio's immediate vicinity in less than one hour, these student agents were instructed to limit their transm.issions to one hour or less.
+Places for concealment of equipment, when not in use ,
+recomr-nended in thi.s GRU tra.ining course are not unusual: overstuffed furniture; false bottozns in wardrobes and other items of furniture; and secret compartments in the walls, ceilings and floors.
+                  In addition to the course on radio operation, the prospecti.ve GRU "illegal residents" were given basic agent training in;
+- 47 
+methods of security, forrns of liaison (contacts, meets, etc. ), re- c ruitin.g procedure, intelligence objectives, and enemy police organizations and methods n
+Docurnent and nondocument photography and laboratory
+work (using the 35 mm. Russian n Fed, a copy of the "Leica"), cryptography, and the use of secret inks also were part of the course.
+                 Another Soviet innovationis the development of a more compact agent radio. During the latter part of World War Il, and during the years since the war, a radio referred to as the "Tensor M'! model has made its appearance in widely scattered Soviet operations. This model or variations of it were furnished behind-the -lines agents parachuted into Ge rmany late in the war, and have been furnished agents in Japan, Finland, and Western Europe in more recent opera tions.
+                 This equipment consists of three, and sometimes four, units packaged separately (receivers, transmitte r s , and rectifiers) in metal cases, each unit of which Ineasures approximately 1 1/2 by 4 by 7 inches. The complete set, with accessories, can be fitted into a medium-sized piece of luggage. Although such units have not been identified with anything produced in the Englishspeaking countries, they bear, probably for reasons of deception,
+- 48 -
+English printing. Their construction indicates the units are factory
+produced, primarily for intelligence-service use, Under good operating conditions this equiprnent is capable of transrnitting •up to or
+exceeding 1000 miles.
+                 The ' *Tensor M" type equipment is more readily concealed and transported than the earlier Soviet agent-type radio, many of which were irnprovised and agent built.
+                 There is also an indication that the Soviets have developed a weather-resisting proce ss pe rmitting agent radio equipment to be buried in the ground for long periods of time. Such equipment is reported to have been furnished agents connected with a Soviet
+"stay behind" program In the satellite countries, who would be called into service should the Soviet Union lose control of that territory. The equipment is alleged to be buried in locations known only to the agent and his superior and is exhumed an.d examined once a year for defects. Meanwhile, the agent operators have been given cipher systerns and call schedules and are held in readiness, with no other
+assignments.
+Current Clande stine Operating Techniques
+Two ' t il legal residen&s t ' in Western Europe, one of
+- 49 
+which was established in 1 948 and the other at an earlier date, operating under strictly clandestine circumstances, provide hne fairly current information on Soviet rnethods. These operations were provided with two communications systems, agent radio and an overland courier link, connecting with an official Soviet mission in an adjoining country. First, the radio systern will be described briefly. The radio equipment provided the agents in these op-
+erations was similar to the ' t Tensor M" type described in the foregoing. In one case, the agents, sec retly entering the country of operation, brought it in, in a small suitcase. In the other, the agent, on arriving in the country safely, transrnitted an open code letter to a mail drop outside the country, and the radio was brought in by courier and turned over to him personally. Both units were set up and operated from private dwellings.
+On their dispatch, these agents were provided with a
+schedule for several months in advance cove ring broadcast dates, times, and frequencies for communicating with the 't Centre. (The control station believed to have been located in or near Moscow. This schedule, too complicated to be mernorized, in one instance was photographed on silk and sewn into the lining of the agent! s clothing, The schedule had several provisions.
+                  First, there was a table of bilateral contacts wi.th the "Centre . each of which provided for two wave lengths, the .fi.rst for regular contact, to be used during the first 15 minutes of the call and the second, an alternate, to be used if the first did not result in contact.
+                  In order not to exceed the one -hour broadcast tirne , there was provision for a unilateral contact, to occur on a specified frequency at a given ti.me on the night prior to the bilateral contact.
+Acknowledgment of the receipt of the unilateral message would, thus, be made by the rece.iving party during the subsequent bilateral session.
+Unilateral contacts, offer.ing greater security from direction finding,
+inc reased in number, an.d the bilate ral contac.ts decreased, as these operations progressed,
+                 In addition, the agent was provided with a schedule of "control calls'! (about 12 a month) in which the "Centre 'l went on the air at certain times and the agent responded only if he had a message.
+If he had nothing to send, it was not necessary for him to stand by for such calls.
+The call letters used by the agent for all transrnissions
+- 51 -
+are changed with each broadcast-as are the call letters of the con-
+trol station in. the regular bilateral contacts-a-and are baaed on a formula derived from the calendar day and month.
+The cipher systerns used in the operations in question
+conform generally to those described earlier in this paper. The plain text is conve rted into nurnbers, the key to which is in a memorized code word. In the second stage reference is made to a key book, and a second set of nun-abers is obtained. The products are added, and the final cipher obtained. A variation of this system was
+used also in these operations, in which the numerals in the latter stage were then transposed in.to letters of the alphabet, and the message as transrnitted is in letters rather than numbers.
+The key books used in the operations in que stion were
+popular editions of current fiction, and they were not changed frequently. In one instance the sarne key book was in use for over two
+years. The agent (and this appears to be typical practice) selected
+the book to be used, purchased two copies, kept one for himself, and
+transmitted the other to the I 'Centre ' t by courier.
+Radio contact was establi shed on an average of five or
+six times a month, for brief and urgent operational traffic and administrative rnatters such as the receipt of funds by courier, the dispatch
+- 52 -
+of film by courier, and arrangements for courier meetings.
+                 During the early period of the operations in que stion regular courier liaison, with personal meetings, occurred about once a month, later being reduced to three -month intervals. Such meetings were stipulated as to time, place, and recognition signals; and it was in this rnanner that funds and equipment were brought in to the operating group and the bulkier reports and documents were transmitted to the 'Centre. Both operations made use of 35 rnrn. film for sorne of their transmissions.
+                 The chief of one of the groups, after a year in operation, was called to an adjoining country, where he was in direct contact with a superior. He was instructed to prepare a detailed report of his organizat.ional work and full account of his ope rational activitie s for the year. This report required about 1 5 days to prepare, and on its completion he was instructed to return to his operation. While in direct contact with his superior organization, however, this agent was instructed on his return to operations to prepare a series of u letter boxes" (hiding places or caches to which we have referred in the operations in Sweden), and to submit plans and photographs on each for approval. These, of course, were to
+- 53 -
+eliminate personal contact between couriers and network members. Four such loc ations were selected and subrnitted, one a hole in a pile of stones in a city park, and the others in remote p.laces outside of the city. Two were approved, including the one in the park, but it
+appears that they never were used; instead, personal meetings with couriers continued. However, in the companion operation box" was used. The "Centre" notified the "illegal resident" by radio that funds would be deposited for hirn in a hiding place; and, although he had three prepared and approved caches, the "Centre" chose to establish a new one for this deposit. He was given detailed instructions for locating a brick wall in which one brick was missing. By reaching deeply into this hole, the agent found the package. It might be noted that U. S. currency was supplied in this instance.
+            The "letter box' I cache is not a new development in Soviet intelligence technique, but until recently is not known to have been used in the United States. (Parcel lockers have been used to make transfers, a variation of this idea. ) However, in recent Soviet operations here the practice has been discussed or employed in
+three separate instances. When used it is usually accompanied by a signal mark in chalk or pencil indicating to the other party that a
+"deposit" is waiting to be picked up. When one party wishes to meet
+- 54 -
+with the other, this may be indicated' by placing a mark on a particular page of a public telephone book or other accessible public document.
+                Another twist on current operating methods is noted in the case which led to the conviction of 22 persons for espionage in Greece during the past year o Two clande stine agent radio stations located in private dwellings were uncovered in this case by directionfinding equipment. Both were concealed in basement crypts or vaults, the entrances to which were hi.dden. In one case a sliding concrete
+ block covered the entrance, and in the other a door step, which could be bolted into place from within, covered the entrance. In the first house the tenants led the police immediately to the crypt; but in the other, although the station was in operation when the raid began, it was many hours before the raiding party located the crypt and then only with aid of mine -detecting equipment. A Greek Communist leader, in the crypt when it was located, shot and killed himself before the police gained entrance. Before that, however, smoke was obse rved coming frozn a chimney; and, realizing that the oper-
+ator was burning his documents, the police poured water down on the fire and thus salvaged sorrie mate rial, including key books which subsequently were of assistance in breaking back traffic.
+- 55 -
+Automatic Transmitte rs
+            The most recent and the outstanding Soviet achieve ment in c lande stine communications is the development of an automatic tape transmitter, capable of sending up to 500 words a minute , adapted for use in conjunction with the "Tensor M" type equipment . Such equiprnent, which will fit readily into apiece of luggage 18 inches in length, has been placed in use by Soviet intelligence.
+An entirely new problem is therefore presented to the
+direction -finding services. The hand-keyed agent radio of the past averaged 10 to 15 words per minute, and his broadcasts were measured in terms of an hour or less. The -automatic equipment will enable him to get on and off the air in a very few minutes.
+                  A staternent cannot be made as to the extent of the use of this automatic equipment in Soviet operations, nor can its technical performance be judged at the present time. It promises, however, to relieve the main weakness in Soviet clande stine communications and to offer prospect for greater use of agent radio in the future.
+Mic rodots
+Special emphasis has been given in this study of Soviet
+- 56 -
+communications to agent radio and its auxiliary, the clande stine
+courier, because the operations studied have given prominence to these rnediums. Thig is not to discount the possibilities of the microdot. Akhmedov, to whom we have referred previously, has stated that the mic rodot process wag known to the' Fourth Departmene t(Soviet Military Intelligence) in 1940, and related a specific instance of its use at that time. One Volnuchin was dispatched to the United States as a re sident late in 1940, and was given a letter to deliver to the Military Attache at Washington. The cover text was in the form of a letter from a relative; the mic rodot was placed over an "i.
+Akh.medov recalled that Volnuchin lost the letter en route, and on reporting the fact '*as recalled from Washington and dismissed from the service.
+It can be assumed that the Soviet intelligence services
+have added the Ge rrnan know-how in this field, and that effective use of it can now be Inade in their operations.
+Secret Inks and Open Code
+Although the technical aspects of sec ret ink c ommunic a -
+tion are not proper to this study, it is necessary that attention be
+- 57 -
+directed to it as a medium. Brief reference has been rnade to the enciphered Inessages in secret inks in the traffic between Soviet networks in South Arne rica and New York during the early 1940 1 s, and it has been noted that training in this subject was given prospective GRU 't re sidents ll in 1945. Lacking the speed of radio and the capacity of a courier systern, secret ink comrnunication rnight be looked upon
+as an auxiliary or ernergency medium.
+            Another form of written comrnunication which must be considered, and which cannot be fully treated herein, is open code. This is a general term for the practice of concealing messages within innocuous appearing personal corre spondence or other cover texts.
+This may be effected i.n a number of ways; cryptic words, symbols, or letters having special markings or positions, all forms of open code, usually are arranged privately to cover contingent situations.
+            Situations which have not been provided for occasion the use. of double-meaning language, an".her form of open code, and for this reason it is of particular interest. It is insecure and dan-
+gerous, and its use indicates an erne rgency. Rachel Duebendorfer t s
+communications with He rmina Rabinowitch in Canada, necessitated
+by the fact that she was completely cut off, illustrate the use of
+- 58 -
+double-meaning language and the circumstances requiring it:
+We live in the former apartment and are working as previously in the old firrn. . . Relations with Lucy are good. . . Sisi l s (Duebendorfer) position is sad . Please inform Gisel t s parents (Soviet Embassy at Ottawa) that they must remit 6, 700 dollars.
+(Report of the Royal Commission, p. 571)
+A few weeks later Duebendorfer sent another appeal
+via Rabinowitch:
+Please inform Gisel's family, that she should advise Znarnensky 1 9 that Sisi is alive and works as of old with Lucy. . . For the work of Sisi Gisel's farnily r-nust transfer 10, 000 dollars. . . .
+(Ibid, p. 573)
+The reference in the second letter to Znarnensky 19,
+the Moscow headquarters address of the GRU, was considered particularly indisc reet by Soviet intelligence officials in Ottawa.
+Conclusion
+In summary, the main links between Soviet networks
+and the "Centre" are provided by the legal cornrnunications systern
+of Soviet rnissions. Since greater security, speed, and capacity are
+offe red, the official channels will be used as long as they are available.
+- 59 _
+            When cut off from official channels in the past, Soviet networks have turned to agent radio; and, where it was possible to do so, augmented the radio systen•z by a courier link with an accessible Soviet mis sion in a neighboring country. Under clande stine conditions, the future prospect would seern to be for heavier reliance upon agent radio if autornatic transmitting equipment proves to be
+effective. Courier systerns will be neces sary to sustain operations over a long period of tirne, and the microdot and sec ret ink processes may in sorne instances replace the 35 mm. film in the hands of the
+courier. Emergency situations Inay call for the use of such devices as open code on occasion. But the rigid centralization which is a trademark of Soviet ope rations will require the rapid exchanges in
+basic communications that only radio can provide.
+This would seern to have an application to Soviet op -
+e rations in the United States should a break in relations occur, and
+it must be assurned that plans for an agent radio systern to function under such conditions have been formulated.
+- 60 -
+
+
+56R000400090001-8
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+-6-
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+-6-
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+-6-
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+-6-
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+-6-
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+
+
+
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
+
+
+Approved For Release 1999/09/07 : CIA-RDP65-00756R000400090001-8
+
