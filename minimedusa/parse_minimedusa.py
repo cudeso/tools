@@ -8,6 +8,9 @@ from datetime import datetime
 write_to_minimedusa_file_output = True
 minimedusa_file_output = "minimedusa_output.txt"
 
+do_pdns= True
+do_rdns = True
+
 ### Which IP list to use from Minimedusa?
 #       official, without private:https://minimedusa.lol/ip/current-cleaned.txt
 #       official:https://minimedusa.lol/ip/current.txt
@@ -21,6 +24,8 @@ whois_port = 43
 
 ### CIRCL Passive DNS API
 pypdns = pypdns.PyPDNS(basic_auth=('USERNAME','PASSWORD'))
+tld_check = [".be"]
+tld_highlight = {}
 
 ### DNS server for (optional) RDNS
 rdns_server = "8.8.8.8"
@@ -47,7 +52,7 @@ def get_rdns(ip, rdns_server):
     except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.resolver.Timeout):
         return None
 
-def minimedusa_query(ips, whois_server, whois_port, pypdns, rdns_server, rdns=False):
+def minimedusa_query(ips, whois_server, whois_port, pypdns, do_pdns, rdns_server, do_rdns):
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((whois_server, whois_port))
         query = "begin\nverbose\n" + "\n".join(ips) + "\nend\n"
@@ -67,22 +72,30 @@ def minimedusa_query(ips, whois_server, whois_port, pypdns, rdns_server, rdns=Fa
         values = line.split('|')
         values = [v.strip() for v in values]
         ip = values[1]  # IP is in column 1
-        print("Processing IP: {}, remaining {}".format(ip, len(result) - len(lines[2:])))
+        print("Processing IP: {}".format(ip))
         result[ip] = dict(zip(header, values))
 
         result[ip]["domains"] = []
         result[ip]["rdns"] = None
         try:
-            # CIRCL Passive DNS
-            pdns = pypdns.rfc_query(ip)
-            if len(pdns) > 0:
-                for record in pdns:
-                    if record.rrtype == "A":
-                        result[ip]["domains"].append(record.rdata)
+            # Passive DNS
+            if do_pdns:
+                pdns = pypdns.rfc_query(ip)
+                if len(pdns) > 0:
+                    for record in pdns:
+                        if record.rrtype == "A":
+                            result[ip]["domains"].append(record.rdata)
+                            for tld in tld_check:
+                                if record.rdata.endswith(tld):
+                                    if ip in tld_highlight:
+                                        tld_highlight[ip].append(record.rdata)
+                                    else:
+                                        tld_highlight[ip] = [record.rdata]
 
             # Reverse DNS
-            if rdns:
+            if do_rdns:
                 result[ip]["rdns"] = get_rdns(ip, rdns_server)
+
         except Exception as e:
             result[ip]["domains"] = []
             result[ip]["rdns"] = None
@@ -91,7 +104,7 @@ def minimedusa_query(ips, whois_server, whois_port, pypdns, rdns_server, rdns=Fa
 if __name__ == '__main__':
     minimedusa = get_minimedusa(source_minimedusa)
     print("Got {} IPs from Minimedusa".format(len(minimedusa)))
-    minimedusa_dict = minimedusa_query(minimedusa, whois_server, whois_port, pypdns, rdns_server, rdns=True)
+    minimedusa_dict = minimedusa_query(minimedusa, whois_server, whois_port, pypdns, do_pdns, rdns_server, do_rdns)
     
     title = "MegaMedusa config: Parsed {} IPs ({})".format(len(minimedusa_dict), datetime.now().date())
     summary = "Records\n------------\n"
@@ -100,7 +113,14 @@ if __name__ == '__main__':
         entry = minimedusa_dict[el]
         summary += "{}|{}|{}|{}|{}|{}\n".format(el, entry["asn"], entry["cc"], entry["as_name"], entry["rdns"], entry["domains"])
     summary += "\n"
-
+    summary += "\n"
+    if do_pdns or do_rdns:
+        summary += "TLD checks\n------------\n"
+        summary += "(best to ignore Cloudflare, Google, etc. hits | grep -v ^172.6)\n"
+        for el in tld_highlight:
+            summary += "{}|{}\n".format(el, tld_highlight[el])
+        summary += "\n"
+    
     if write_to_minimedusa_file_output:
             summary = title + "\n\n" + summary + "\n"
             with open(minimedusa_file_output, 'w') as file:

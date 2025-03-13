@@ -2,35 +2,44 @@
 
 Get the data from https://minimedusa.lol/
 
-Requires pypdns
-Add your CIRCL Passive DNS credentials 
-`pypdns = pypdns.PyPDNS(basic_auth=('USERNAME','PASSWORD'))`
+Configuration
+* Output file, where to write the results.
+  * write_to_minimedusa_file_output = True
+  * minimedusa_file_output = "minimedusa_output.txt"
+* Do Passive DNS lookup with CIRCL
+  * do_pdns= True
+  * Add your CIRCL Passive DNS credentials : `pypdns = pypdns.PyPDNS(basic_auth=('USERNAME','PASSWORD'))`
+* Do reverse DNS
+  * do_rdns = True
+  * Set the DNS server to use `rdns_server`
+
+If you enable passive dns or dns you can also highlight domains for a specific TLD. Specify the TLD in `tld_check`.
 
 # Output
 
 ```
-MegaMedusa config: Parsed 38307 IPs (2025-03-11)
+MegaMedusa config: Parsed 38307 IPs (2025-03-13)
 
 Records
 ------------
 IP|ASN|CC|AS Name|RDNS|Domains
 72.10.160.170|36666|CA|GTCOMM, CA|None|[]
 154.236.177.101|36992|EG|ETISALAT-MISR, EG|HOST-101-177.236.154.nile-online.net.|[]
+203.190.44.225|45317|ID|JATARA-AS-ID Jaringan Lintas Utara, PT, ID|None|[]
+72.10.160.174|36666|CA|GTCOMM, CA|None|[]
+115.127.5.146|24342|BD|BRAC-BDMAIL-AS-BD BRACNet Limited, BD|host-146.bracnet.net.|[]
 72.10.164.178|36666|CA|GTCOMM, CA|None|[]
+186.148.195.165|269984|VE|CORPORACION MATRIX TV, C.A., VE|None|[]
 103.39.49.156|63501|ID|MEGAHUB-AS-ID PT Mega Mentari Mandiri, ID|ip-103-39-49-156.mentari.net.id.|[]
-1.0.171.213|23969|TH|TOT-NET TOT Public Company Limited, TH|node-8np.pool-1-0.dynamic.totinternet.net.|[]
-192.145.228.226|140031|ID|MYNUSA-ID PT Mandala Lintas Nusa, ID|None|[]
 23.122.184.9|7018|US|ATT-INTERNET4, US|23-122-184-9.lightspeed.miamfl.sbcglobal.net.|['photos.lilcmac.xyz', 'panel.lilcmac.xyz', 'fenrus.lilcmac.xyz', 'portainer.lilcmac.xyz', 'plex.lilcmac.xyz']
-67.43.228.252|36666|CA|GTCOMM, CA|None|[]
-199.48.129.114|36236|US|NETACTUATE, US|beetle.gmn-usa.com.|['beetle.gmn-usa.com', 'gmn-usa.com', 'globalmarinenet.net']
-72.10.160.90|36666|CA|GTCOMM, CA|None|[]
-139.255.33.242|9905|ID|LINKNET-ID-AP Linknet ASN, ID|ln-static-139-255-33-242.link.net.id.|[]
-67.43.236.20|36666|CA|GTCOMM, CA|None|[]
+156.200.116.67|8452|EG|TE-AS TE-AS, EG|host-156.200.116.67.tedata.net.|[]
 ...
-54.152.3.36|14618|US|AMAZON-AES, US|ec2-54-152-3-36.compute-1.amazonaws.com.|[]
-54.38.217.92|16276|FR|OVH, FR|externalweb2.duke-management.com.|['brigittechardome.be', 'samuipierresort.com', 'slsteflschool.com', 'www.slsteflschool.com', 'nautiness-sailing.com', 'www.brigittechardome.be', 'etslousberg.be', 'externalweb2.duke-management.com', 'www.samuipierresort.com', 'scuderia-events.be']
-47.243.113.74|45102|US|ALIBABA-CN-NET Alibaba US Technology Co., Ltd., CN|None|[]
-31.128.41.253|198610|RU|BEGET-AS, RU|None|['juecoucupo.beget.app']
-101.47.140.203|150436|SG|BYTEPLUS-AS-AP Byteplus Pte. Ltd., SG|None|[]
-146.103.3.5|13213|US|UK2NET-AS, GB|None|[]
+
+TLD checks
+------------
+(best to ignore Cloudflare, Google, etc. hits | grep -v ^172.6)
+54.38.217.92|['brigittechardome.be', 'www.brigittechardome.be', 'etslousberg.be', 'scuderia-events.be']
+63.141.128.22|['tecline.be', 'additto-lubricants.be']
+160.153.0.1|['digiflare.be']
+...
 ```
