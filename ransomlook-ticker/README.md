@@ -130,3 +130,5 @@ Each entry in the output JSON file follows this structure:
   }
 ]
 ```
+
+You can use this JSON file to create useful **statistics** and as input for a **CTI statistics dashboard** on ransomware notifications in specific sectors or countries.
