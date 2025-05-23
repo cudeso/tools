@@ -1,0 +1,30 @@
+OPENAPI_KEY = ""
+GOOGLE_API_KEY = ""
+GOOGLE_CSE_ID  = 45c2495e3bf55492c"
+MATTERMOST_WEBHOOK = ""
+HIGHLIGHT_TICKER = {"Energy", "Gas", "Oil", "Belgium"}
+
+
+# You can leave the below values as they are
+DAYS = 1
+RANSOMLOOK_API_URL = f"https://www.ransomlook.io/api/last/{DAYS}"
+RANSOMLOOK_OUTPUT = "ransomlook-ticker.json"
+RANSOMLOOK_LOG = "ransomlook-ticker.log"
+
+OPENAPI_MODEL = "gpt-4o-mini"
+OPENAPI_TEMPERATURE = 0.0
+MATTERMOST_VERIFY_CERT = False
+PROMPT_TEMPLATE = (
+    "You are a threat intelligence assistant and tracking posts of ransomware groups. They only display alleged victim names on their leak sites.\n"
+    "The victim name is: '{title}' and the post description is: {description}\n\n"
+    "The Google web search snippets on the victim include: {snippets}\n"
+    "I need you to help me find the following information about the victim"
+    "and answer in strict JSON with these keys ONLY:\n"
+    "  company_name   (string)\n"
+    "  country        (string, ISO 3166‑1 country name if known, else \"unknown\")\n"
+    "  sector         (list, the list of sectors the victim belongs to. Use sectors from the NIS Directive\n"
+    "  url            (string, victim's official website or \"unknown\")\n"
+    "  summary        (string, ≤ 50 words)\n\n"
+    "If you are uncertain about a field, put \"unknown\", but do not invent facts.\n"
+    "For the country location, use the company address as displayed by the Google search.\n"    
+)
