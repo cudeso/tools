@@ -125,7 +125,7 @@ Each entry in the output JSON file follows this structure:
     "company_name": "<victim company>",
     "country": "<country>",
     "sector": ["<sector1>", "<sector2>"],
-    "url": "<detailed incident URL>",
+    "url": "company url",
     "summary": "<brief summary from LLM>"
   }
 ]
