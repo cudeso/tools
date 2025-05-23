@@ -19,7 +19,6 @@ This project is ideal if you want:
 * **Duplicate detection**: skips already-processed entries
 * **Context enrichment** via Google Custom Search
 * **Parsing** by ChatGPT to extract:
-
   * Company name
   * Ransomware group
   * Date discovered
@@ -29,8 +28,7 @@ This project is ideal if you want:
   * Brief summary
 * **Persistent storage** of results to a JSON file
   * Can also be used for **statistical** purposes
-* **Mattermost notifications** with:
-
+* **Mattermost notifications** with
   * Highlights for specified countries or sectors
 
 ## ⚙️ Prerequisites
@@ -42,15 +40,13 @@ This project is ideal if you want:
 
 ## 🛠️ Installation
 
-Download `ransomlook-ticker.py` and save `config.py.default` as `config.py`.
+Download `ransomlook-ticker.py`, `requirements.txt` and save `config.py.default` as `config.py`.
 
 Create a virtual environment and install dependencies
 ```bash
 python3 -m venv venv
 venv/bin/pip install -r requirements.txt
 ```
-
----
 
 ## ⚙️ Configuration
 
@@ -81,11 +77,41 @@ venv/bin/python ransomlook-ticker.py
   * Send formatted alerts to Mattermost
   * Log operations to `ransomlook.log`
 
+## ⏰ Cron job schedule
+
+Install the application as a cron job so you get regular updates. Ideally run the script every 2 or 3 hours.
+
+```
+0 */2 * * * cd /home/cti/ransomlookticker ; /home/cti/ransomlookticker/venv/bin/python /home/cti/ransomlookticker/ransomlook-ticker.py
+```
+
+## 📸 Screenshot
+
+![screenshot.png](screenshot.png)
+
+An extract from the log file:
+
+```
+2025-05-17 11:02:18,070 - INFO - Google search results for query 'Selenis (Evertis is also involved)': 5 results
+2025-05-17 11:02:20,620 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-17 11:02:20,622 - INFO - Skipping already processed post: Carney Badley Spellman
+2025-05-17 11:02:20,622 - INFO - Skipping already processed post: freudenberg-cranes.com
+2025-05-17 11:02:20,622 - INFO - Skipping already processed post: blainemn.gov
+...
+2025-05-17 11:02:20,624 - INFO - Skipping already processed post: south african airways (flysaa.com)
+2025-05-17 11:02:20,624 - INFO - Skipping already processed post: www.toho.co.jp
+2025-05-17 11:02:23,429 - INFO - Successfully posted to Mattermost: Av Alumitran
+2025-05-17 11:02:24,199 - INFO - Successfully posted to Mattermost: Murphy Pearson Bradley & Feeney
+2025-05-17 11:02:25,603 - INFO - Successfully posted to Mattermost: Franman
+2025-05-17 11:02:26,795 - INFO - Successfully posted to Mattermost: Gearhiser Peters Elliott & Cannon, PLLC
+2025-05-17 11:02:30,436 - INFO - Successfully posted to Mattermost: Diyar
+```
+
 ## 🔍 Application flow
 
 ![ransomlook-ticker.png](ransomlook-ticker.png)
 
-## 🗂️ JSON Output Schema
+## 🗂️ JSON output schema
 
 Each entry in the output JSON file follows this structure:
 
