@@ -26,6 +26,9 @@ def extract_hostname(source_csv):
     m = re.search(r'/([^/]+)\.zip_results', source_csv)
     if m:
         return m.group(1)
+    m = re.search(r'/([^/]+)\.tgz_results', source_csv)
+    if m:
+        return m.group(1)
     return "unknown"
 
 
@@ -319,6 +322,37 @@ def dive_logs(df, outdir):
     )
 
 
+def combine_timeline(df, outdir):
+    combined = df.copy()
+    if 'Source CSV' in combined.columns:
+        combined['source_file'] = combined['Source CSV']
+    else:
+        combined['source_file'] = 'unknown'
+
+    ts_strings = combined['Timestamp'].astype(str).str.replace(r'Z$', '+00:00', regex=True)
+    try:
+        combined['Timestamp'] = pd.to_datetime(
+            ts_strings,
+            format='ISO8601',
+            utc=True,
+            errors='raise'
+        )
+    except Exception as e:
+        print(f"Combining timelines: Error parsing 'Timestamp' values: {e}", file=sys.stderr)
+
+    other_cols = [col for col in combined.columns if col not in ['Timestamp', 'source_file']]
+    combined = combined[['Timestamp', 'source_file'] + other_cols]
+
+    combined = combined.sort_values('Timestamp')
+
+    out_csv = Path(outdir) / "combined_timeline.csv"
+    try:
+        combined.to_csv(out_csv, index=False)
+        print(f"Combined timeline written to '{out_csv}' sorted by Timestamp.")
+    except Exception as e:
+        print(f"Combining timelines: Error writing output file '{out_csv}': {e}", file=sys.stderr)
+
+
 def main():
     args = parse_args()
     outdir = Path(args.output)
@@ -329,11 +363,12 @@ def main():
         print("No valid timestamped rows found.", file=sys.stderr)
         sys.exit(1)
 
-    plot_action_logon(df,   outdir/"timeline_action_logon.png")
+    plot_action_logon(df,    outdir/"timeline_action_logon.png")
     plot_by_event_type(df,   outdir/"timeline_event_type.png")
     plot_users(df,           outdir/"timeline_logon_users_ips.png")
     plot_activity(df,        outdir/"timeline_activity.png")
-    dive_logs(df,   outdir)
+    dive_logs(df, outdir)
+    combine_timeline(df, outdir)    
 
     print("\n==== Global Timeline Stats ====")
     print(f"First entry: {df['Timestamp'].min()}")
