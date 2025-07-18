@@ -1,6 +1,6 @@
 OPENAPI_KEY = ""
 GOOGLE_API_KEY = ""
-GOOGLE_CSE_ID  = 45c2495e3bf55492c"
+GOOGLE_CSE_ID  = ""
 MATTERMOST_WEBHOOK = ""
 HIGHLIGHT_TICKER = {"Energy", "Gas", "Oil", "Belgium"}
 
