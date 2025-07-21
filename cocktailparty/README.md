@@ -1,18 +1,18 @@
 # Cocktailparty
 
-Cocktailparty is the CIRCL **CTI data streaming** platform at [https://cocktailparty.lu/](https://cocktailparty.lu/).
+Cocktailparty is the CIRCL **CTI data streaming** platform: [https://cocktailparty.lu/](https://cocktailparty.lu/).
 
 It supports three data streams:
 
-- Certificate Transparency: newly registered certificates
-- Certificate Transparency: newly registered domains
-- Certificate Transparency: newly registered certificates (full)
+- Certificate Transparency: **newly registered certificates**
+- Certificate Transparency: **newly registered domains**
+- Certificate Transparency: **newly registered certificates (full)**
 
 You can subscribe to the stream with [websocat](https://github.com/vi/websocat/releases), but I created a small Python script to make filtering data easier.
 
 # Serve a Cocktail
 
-The `serve_cocktail.py` script is a Python client for Cocktailparty. Its main features are:
+The `serve-a-cocktail.py` script is a Python client for Cocktailparty. Its main features:
 
 - **WebSocket subscription**: Connects to the WebSocket API to receive real-time data streams about newly registered certificates and domains.
 - **Custom filtering**: Filters incoming certificate and domain events based on user-defined highlight patterns.
@@ -22,33 +22,54 @@ The `serve_cocktail.py` script is a Python client for Cocktailparty. Its main fe
 
 ## Configuration
 
-Before running the script, set the following configuration options:
+Before running the script, set the following configuration options in `config.py`:
 
 - `COCKTAIL_HIGHLIGHT`: A list of keywords or regex patterns to highlight/filter events (e.g., `[".be$", "bank"]`).
 - `MATTERMOST_WEBHOOK`: The URL of your Mattermost webhook for notifications.
 - `WS_APIKEY`: Your API key for authenticating with Cocktailparty.
-- `WS_JOIN`: The data stream to subscribe to, either `COCKTAIL_CERTIFICATES` or `COCKTAIL_NEW_DOMAINS`.
 
-You can set these variables directly in the script or via environment variables for better security.
+## Install
 
-**Example:**
-```python
-COCKTAIL_HIGHLIGHT = [".be$", "bank"]
-MATTERMOST_WEBHOOK = "https://mattermost.example.com/hooks/your-webhook-id"
-WS_APIKEY = "your-cocktailparty-api-key"
-WS_JOIN = COCKTAIL_CERTIFICATES
+Set up a Python virtual environment and install the required libraries:
+
+```sh
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 ## Run
 
-Typically, I run the script twice: once with `WS_JOIN` set to `COCKTAIL_CERTIFICATES`, and a second time with `WS_JOIN` set to `COCKTAIL_NEW_DOMAINS`.
+Run the script from the Python virtual environment:
+
+```sh
+python serve-a-cocktail.py
+```
+
+Optionally, you can run it as a service using systemd. Example systemd unit file (`/etc/systemd/system/serve-a-cocktail.service`):
+
+```
+[Unit]
+Description=Serve a cocktail
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/data/cocktailparty/
+User=ubuntu
+ExecStart=/bin/bash -c '/data/cocktailparty/venv/bin/python serve-a-cocktail.py; wait'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
 
 ## Advice
 
-Your filter, defined in `COCKTAIL_HIGHLIGHT`, greatly affects the usefulness of the notifications. If you receive too many notifications, you may start ignoring them. My approach is to:
+Your filter, defined in `COCKTAIL_HIGHLIGHT`, greatly affects the usefulness of the notifications. If you receive too many notifications, you may start ignoring them. Recommended approach:
 
-- Add my customer(s) name as a string
-- Add their public domains so I get notified if a new subdomain pops up
+- Add your customer(s) name as a string.
+- Add their public domains so you get notified if a new subdomain appears.
 
 ## Screenshot
 
