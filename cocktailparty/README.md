@@ -1,6 +1,6 @@
-# Cocktailparty
+# CocktailParty
 
-Cocktailparty is the CIRCL **CTI data streaming** platform: [https://cocktailparty.lu/](https://cocktailparty.lu/).
+CocktailParty is the CIRCL **CTI data streaming** platform: [https://cocktailparty.lu/](https://cocktailparty.lu/).
 
 It supports three data streams:
 
@@ -12,13 +12,13 @@ You can subscribe to the stream with [websocat](https://github.com/vi/websocat/r
 
 # Serve a Cocktail
 
-The `serve-a-cocktail.py` script is a Python client for Cocktailparty. Its main features:
+The `serve-a-cocktail.py` script is a Python client for CocktailParty. Its main features:
 
 - **WebSocket subscription**: Connects to the WebSocket API to receive real-time data streams about newly registered certificates and domains.
 - **Custom filtering**: Filters incoming certificate and domain events based on user-defined highlight patterns.
 - **Notification integration**: Sends filtered results as notifications to a Mattermost channel.
 - **Logging**: Writes events and notifications to a local log file.
-- **Extensible feeds**: Easily switch between Cocktailparty feeds.
+- **Extensible feeds**: Easily switch between CocktailParty feeds.
 
 ## Configuration
 
@@ -26,7 +26,7 @@ Before running the script, set the following configuration options in `config.py
 
 - `COCKTAIL_HIGHLIGHT`: A list of keywords or regex patterns to highlight/filter events (e.g., `[".be$", "bank"]`).
 - `MATTERMOST_WEBHOOK`: The URL of your Mattermost webhook for notifications.
-- `WS_APIKEY`: Your API key for authenticating with Cocktailparty.
+- `WS_APIKEY`: Your API key for authenticating with CocktailParty.
 
 ## Install
 
